@@ -18,11 +18,11 @@ _And so, that's where I decided to lend a bit of a helping hand_.
 
 ## Let the Code speak
 
-I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I am finding most enjoyable and acceptable.
+I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I am finding most enjoyable and acceptable so far.
 
 ## Repository structure
 
-This repository is setup as a monorepo, so as to keep the updated versions of the isolated bits of the course's code and tests well organized all within this single repository.
+This repository is being setup as a monorepo, so as to keep the updated versions of the isolated bits of the course's code and tests well organized all within a single repository.
 
 ### Smart Contracts
 
