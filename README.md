@@ -1,6 +1,6 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
-> Up-to-date Solidity/web3.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
+Up-to-date Solidity/web3.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
 ## The Reason
 
@@ -14,6 +14,21 @@ I make heavy use of the online learning website [udemy.com](https://www.udemy.co
 
 _And so, that's where I decided to lend a bit of a helping hand_.
 
-## Giving back to the Community
+## Giving back
 
 I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I found most enjoyable and acceptable.
+
+## Repository structure
+
+This repository is setup as a monorepo, so as to keep the updated versions of the isolated bits of the course's code and tests well organized all within this single repository.
+
+### Smart Contracts
+
+The smart contracts created in the course are:
+
+- [The Inbox Contract](/inbox)
+- The Lottery Contract
+
+## Acknowledgement
+
+I would like to give credit to [Stephen Grider](https://www.udemy.com/user/sgslo/) for creating the [excellent course](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/) for which I created this repository as my own personal add-on. If any mistakes or errors are found within any of this repository's content they should be attributed to an oversight on my part, and in no part should be deemed any fault of the course author, Stephen Grider.
