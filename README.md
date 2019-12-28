@@ -14,7 +14,7 @@ I make heavy use of the online learning website [udemy.com](https://www.udemy.co
 
 _And so, that's where I decided to lend a bit of a helping hand_.
 
-## Giving back
+## Let the Code speak
 
 I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I found most enjoyable and acceptable.
 
