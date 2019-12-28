@@ -29,7 +29,7 @@ This repository is being setup as a monorepo, so as to keep the updated versions
 The smart contracts created in the course are:
 
 - [The Inbox Contract](/inbox)
-- The Lottery Contract
+- [The Lottery Contract](/lottery)
 
 ## Acknowledgement
 
