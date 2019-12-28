@@ -2,6 +2,8 @@
 
 Up-to-date Solidity/web3.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
+**Note**: This is a work-in-progress as I have enrolled in but have not yet completed the abovementioned course.
+
 ## The Reason
 
 Earlier this year I became very interested in entering the blockchain development space and so I embarked on a journey to learn as much as I can, as quickly as I can, within this ever-evolving tech space we refer to as _Blockchain_, and to be more specific, the **Ethereum ecosystem**. Of course, I quickly realised that the development tools and packages being used to build, develop and deploy dApps and tech within this ecosystem all share a common trend: **rapid change and evolution, often introducing breaking changes through iterations of their releases**.
@@ -16,7 +18,7 @@ _And so, that's where I decided to lend a bit of a helping hand_.
 
 ## Let the Code speak
 
-I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I found most enjoyable and acceptable.
+I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I am finding most enjoyable and acceptable.
 
 ## Repository structure
 
