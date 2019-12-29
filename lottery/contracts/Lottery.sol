@@ -2,7 +2,7 @@ pragma solidity >=0.5.0 <0.7.0;
 
 contract Lottery {
     address public manager;
-    address[] public players;
+    address payable[] public players;
 
     constructor() public {
         manager = msg.sender;
@@ -15,5 +15,23 @@ contract Lottery {
         );
 
         players.push(msg.sender);
+    }
+
+    function random() private view returns (uint) {
+        return uint(keccak256(abi.encodePacked(block.difficulty, block.number, players)));
+    }
+
+    function pickWinner() public onlyOwner {
+        uint index = random() % players.length;
+        players[index].transfer(address(this).balance);
+        players = new address payable[](0);
+    }
+
+    modifier onlyOwner() {
+        require(
+            msg.sender == manager,
+            "Only owner can call this function."
+        );
+        _;
     }
 }
