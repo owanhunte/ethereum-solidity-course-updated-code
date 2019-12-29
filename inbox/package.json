@@ -2,7 +2,7 @@
   "name": "inbox",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "compile.js",
   "scripts": {
     "test": "mocha"
   },
