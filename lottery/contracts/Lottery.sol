@@ -27,6 +27,10 @@ contract Lottery {
         players = new address payable[](0);
     }
 
+    function getPlayers() public view returns (address payable[] memory) {
+        return players;
+    }
+
     modifier onlyOwner() {
         require(
             msg.sender == manager,
