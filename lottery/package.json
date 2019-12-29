@@ -1,0 +1,19 @@
+{
+  "name": "lottery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compile.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Owan Hunte",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.28",
+    "dotenv": "^8.2.0",
+    "ganache-cli": "^6.7.0",
+    "mocha": "^6.2.2",
+    "solc": "^0.6.0",
+    "web3": "^1.2.4"
+  }
+}
