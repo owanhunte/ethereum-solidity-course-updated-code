@@ -25,7 +25,7 @@ describe("Lottery Contract", () => {
   });
 
   it("allows one account to enter", async () => {
-    await enterPlayerInLottery(lottery, accounts[1], web3);
+    await enterPlayerInLottery(lottery, accounts[1], web3, "0.02");
 
     const players = await lottery.methods.getPlayers().call({
       from: accounts[0]
@@ -36,9 +36,9 @@ describe("Lottery Contract", () => {
   });
 
   it("allows multiple accounts to enter", async () => {
-    await enterPlayerInLottery(lottery, accounts[1], web3);
-    await enterPlayerInLottery(lottery, accounts[2], web3);
-    await enterPlayerInLottery(lottery, accounts[3], web3);
+    await enterPlayerInLottery(lottery, accounts[1], web3, "0.02");
+    await enterPlayerInLottery(lottery, accounts[2], web3, "0.02");
+    await enterPlayerInLottery(lottery, accounts[3], web3, "0.02");
 
     const players = await lottery.methods.getPlayers().call({
       from: accounts[0]
@@ -48,5 +48,38 @@ describe("Lottery Contract", () => {
     assert.equal(players[1], accounts[2]);
     assert.equal(players[2], accounts[3]);
     assert.equal(players.length, 3);
+  });
+
+  it("requires a minimum amount of ether to enter", async () => {
+    try {
+      await enterPlayerInLottery(lottery, accounts[4], web3, 0);
+      assert(false);
+    } catch (error) {
+      assert(error);
+    }
+  });
+
+  it("only manager can call pickWinner", async () => {
+    try {
+      await lottery.methods.pickWinner().send({
+        from: accounts[1]
+      });
+      assert(false);
+    } catch (error) {
+      assert(error);
+    }
+  });
+
+  it("sends money to the winner and resets the players array", async () => {
+    await enterPlayerInLottery(lottery, accounts[1], web3, "2");
+
+    const initialBalance = await web3.eth.getBalance(accounts[1]);
+    await lottery.methods.pickWinner().send({
+      from: accounts[1]
+    });
+    const finalBalance = await web3.eth.getBalance(accounts[1]);
+    const difference = finalBalance - initialBalance;
+
+    assert(difference > web3.utils.toWei("1.8", ether));
   });
 });

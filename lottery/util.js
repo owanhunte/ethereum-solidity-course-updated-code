@@ -1,11 +1,12 @@
 async function enterPlayerInLottery(
   lotteryContract,
   playerAddress,
-  web3Instance
+  web3Instance,
+  etherAmount
 ) {
   await lotteryContract.methods.enter().send({
     from: playerAddress,
-    value: web3Instance.utils.toWei("0.02", "ether")
+    value: etherAmount ? web3Instance.utils.toWei(etherAmount, "ether") : 0
   });
 }
 
