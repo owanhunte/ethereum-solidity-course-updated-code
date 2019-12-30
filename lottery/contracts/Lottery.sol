@@ -23,7 +23,8 @@ contract Lottery {
 
     function pickWinner() public onlyOwner {
         uint index = random() % players.length;
-        players[index].transfer(address(this).balance);
+        address contractAddress = address(this);
+        players[index].transfer(contractAddress.balance);
         players = new address payable[](0);
     }
 
