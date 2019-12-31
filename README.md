@@ -43,10 +43,10 @@ For more details on the above methods, see [https://github.com/facebook/create-r
 
 ### The lottery-react App
 
-To create the `lottery-react` app I chose the yarn command option, as follows:
+To create the `lottery-react` app I chose to use the yarn command option, as follows:
 
 ```bash
-`yarn create react-app lottery-react`
+yarn create react-app lottery-react
 ```
 
 [Browse the lottery-react App code files](/lottery-react)
