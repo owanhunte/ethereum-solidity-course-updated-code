@@ -1,6 +1,6 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
-Up-to-date Solidity/web3.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
+Up-to-date Solidity/web3.js/Truffle/React code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
 **Note**: This is a work-in-progress as I have enrolled in but have not yet completed the abovementioned course.
 
@@ -30,6 +30,26 @@ The smart contracts created in the course are:
 
 - [The Inbox Contract](/inbox)
 - [The Lottery Contract](/lottery)
+
+### Working with the latest React tooling
+
+The course sections that cover building out a front-end application using React make use of the previous approach of installing `create-react-app` globally via `npm install -g create-react-app`. This is no longer the recommended approach. As such if you have already used this command and installed `create-react-app` globally then you should uninstall the package using `npm uninstall -g create-react-app`. To create a new React app you may now use one of the following methods to ensure that you always use the latest React version:
+
+- **npx**: `npx create-react-app my-app`
+- **npm**: `npm init react-app my-app`
+- **Yarn**: `yarn create react-app my-app`
+
+For more details on the above methods, see [https://github.com/facebook/create-react-app](https://github.com/facebook/create-react-app).
+
+### The lottery-react App
+
+To create the `lottery-react` app I chose the yarn command option, as follows:
+
+```bash
+`yarn create react-app lottery-react`
+```
+
+[Browse the lottery-react App code files](/lottery-react)
 
 ## Acknowledgement
 
