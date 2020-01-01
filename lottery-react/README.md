@@ -1,3 +1,5 @@
+**This README is the one that comes with the create-react-app bootstrapped project setup. I've created a project-specific README for the lottery-react app located [here](project-readme/README.md)**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

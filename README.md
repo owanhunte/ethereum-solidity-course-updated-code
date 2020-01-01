@@ -56,6 +56,7 @@ yarn create react-app lottery-react
 ```
 
 [Browse the lottery-react App code files](/lottery-react)
+[lottery-react App README](/lottery-react/project-readme/README.md)
 
 ## Acknowledgement
 
