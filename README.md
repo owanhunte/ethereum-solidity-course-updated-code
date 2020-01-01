@@ -55,8 +55,8 @@ To create the `lottery-react` app I chose to use the yarn command option, as fol
 yarn create react-app lottery-react
 ```
 
-[Browse the lottery-react App code files](/lottery-react)
-[lottery-react App README](/lottery-react/project-readme/README.md)
+- [Browse the lottery-react App code files](/lottery-react)
+- [lottery-react App README](/lottery-react/project-readme/README.md)
 
 ## Acknowledgement
 
