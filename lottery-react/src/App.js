@@ -16,9 +16,8 @@ class App extends React.Component {
 
   async componentDidMount() {
     const manager = await lotteryContract.methods.manager().call();
-    const players = await lotteryContract.methods.getPlayers().call();
-    const balance = await web3.eth.getBalance(lotteryContract.options.address);
-    this.setState({ manager, players, balance });
+    this.setState({ manager });
+    await this.updatePlayersListAndBalance();
   }
 
   onSubmit = async event => {
@@ -30,7 +29,7 @@ class App extends React.Component {
       value: web3.utils.toWei(this.state.value, "ether")
     });
     this.showMessage("You have been entered!");
-    this.updatePlayersList();
+    this.updatePlayersListAndBalance();
   };
 
   onClick = async event => {
@@ -41,16 +40,17 @@ class App extends React.Component {
       from: accounts[0]
     });
     this.showMessage("A winner has been picked!");
-    this.updatePlayersList();
+    this.updatePlayersListAndBalance();
   };
 
   /**
-   * Improvement to course version: Method to update players list in the
-   * page view without the user having to perform a manual page reload.
+   * Improvement to course version: Method to update players list and balance
+   * in the page view without the user having to perform a manual page reload.
    */
-  updatePlayersList = async () => {
+  updatePlayersListAndBalance = async () => {
     const players = await lotteryContract.methods.getPlayers().call();
-    this.setState({ players });
+    const balance = await web3.eth.getBalance(lotteryContract.options.address);
+    this.setState({ players, balance });
   };
 
   showMessage = async msg => {
