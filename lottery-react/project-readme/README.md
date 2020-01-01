@@ -5,3 +5,11 @@ This is a project-specific README I created for the lottery-react app developed 
 ```bash
 yarn create react-app lottery-react
 ```
+
+## Rename lottery-react/src/utils/lottery.js.example
+
+Before running this app you will need to rename the file [lottery-react/src/utils/lottery.js.example](/lottery-react/src/utils/lottery.js.example) to **lottery-react/src/utils/lottery.js**. You should also compile the [Lottery smart contract](/lottery/contracts/Lottery.sol) and update the `contractAddress` and `abi` variables in your **lottery.js** file with the blockchain address and ABI of your deployed contract on the Rinkeby Test Network.
+
+## MetaMask browser plugin required
+
+As covered in the course, the app expects that you have the MetaMask web browser plugin installed since it makes use of the provider wrapped by the web3.js that MetaMask injects into the web page.

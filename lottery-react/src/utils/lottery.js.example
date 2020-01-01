@@ -7,6 +7,9 @@ import web3 from "./web3";
  *
  * See https://github.com/owanhunte/ethereum-solidity-course-updated-code/issues/2 for
  * further details on why.
+ *
+ * Rename this file to lottery.js and update the contractAddress and abi variables to those for
+ * your own deployed contract.
  */
 const contractAddress = "0x9972A7b3e63fD6cB184445a7888F78BC630dC4E7";
 
