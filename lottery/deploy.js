@@ -9,7 +9,6 @@ const network = process.env.RINKEBY_ENDPOINT;
 
 const provider = new HDWalletProvider(mnemonic, network);
 const web3 = new Web3(provider);
-const message = "Hi there!";
 
 const deploy = async () => {
   const accounts = await web3.eth.getAccounts();
