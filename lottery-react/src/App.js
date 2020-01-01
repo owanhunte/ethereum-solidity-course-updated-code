@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import lotteryContract from "./utils/lottery";
 import web3 from "./utils/web3";
 
@@ -25,24 +24,49 @@ class App extends React.Component {
   onSubmit = async event => {
     event.preventDefault();
     const accounts = await web3.eth.getAccounts();
-    this.setState({ message: "Waiting on transaction success..." });
+    this.showMessage("Waiting on transaction success...");
     await lotteryContract.methods.enter().send({
       from: accounts[0],
       value: web3.utils.toWei(this.state.value, "ether")
     });
-    this.setState({ message: "You have been entered!" });
+    this.showMessage("You have been entered!");
+    this.updatePlayersList();
+  };
+
+  onClick = async event => {
+    event.preventDefault();
+    const accounts = await web3.eth.getAccounts();
+    this.showMessage("Waiting on transaction success...");
+    await lotteryContract.methods.pickWinner().send({
+      from: accounts[0]
+    });
+    this.showMessage("A winner has been picked!");
+    this.updatePlayersList();
+  };
+
+  /**
+   * Improvement to course version: Method to update players list in the
+   * page view without the user having to perform a manual page reload.
+   */
+  updatePlayersList = async () => {
+    const players = await lotteryContract.methods.getPlayers().call();
+    this.setState({ players });
+  };
+
+  showMessage = async msg => {
+    this.setState({ message: msg });
   };
 
   render() {
     return (
-      <div className="App">
+      <div>
         <h2>Lottery Contract</h2>
         <p>
           This contract is managed by {this.state.manager}.
           {this.state.players.length === 1
             ? ` There is currently ${this.state.players.length} person entered, `
             : ` There are currently ${this.state.players.length} people entered, `}
-          competing to win {web3.utils.fromWei(this.state.balance, "ether")}
+          competing to win {web3.utils.fromWei(this.state.balance, "ether")}{" "}
           ether!
         </p>
 
@@ -51,14 +75,19 @@ class App extends React.Component {
         <form onSubmit={this.onSubmit}>
           <h4>Want to try your luck?</h4>
           <div>
-            <label>Amount of ether to enter</label>
+            <label>Amount of ether to enter:</label>{" "}
             <input
               value={this.state.value}
               onChange={event => this.setState({ value: event.target.value })}
-            />
+            />{" "}
             <button>Enter</button>
           </div>
         </form>
+
+        <hr />
+
+        <h4>Ready to pick a winner?</h4>
+        <button onClick={this.onClick}>Pick a winner!</button>
 
         <hr />
 
