@@ -8,7 +8,7 @@ I learned this the hard way as I was compiling using the 0.6.0 compiler when I s
 
 **========= END OF FOREWORD =========**
 
-## Purpose of this compiler Repo
+## Purpose of this Repo
 
 Up-to-date Solidity/web3.js/Truffle/React code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
