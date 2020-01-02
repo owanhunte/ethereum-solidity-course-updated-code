@@ -10,7 +10,7 @@ I learned this the hard way as I was compiling using the 0.6.0 compiler when I s
 
 ## Purpose of this Repo
 
-Up-to-date Solidity/web3.js/Truffle/React code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
+Up-to-date Solidity/web3.js/React code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
 **Note**: This is a work-in-progress as I have enrolled in but have not yet completed the abovementioned course.
 
