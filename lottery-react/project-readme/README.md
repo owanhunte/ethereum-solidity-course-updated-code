@@ -12,4 +12,4 @@ Before running this app you will need to rename the file [lottery-react/src/util
 
 ## MetaMask browser plugin required
 
-As covered in the course, the app expects that you have the MetaMask web browser plugin installed since it makes use of the provider wrapped by the web3.js that MetaMask injects into the web page.
+As covered in the course, the app expects that you have the MetaMask web browser plugin installed since it makes use of the Ethereum Provider API that MetaMask injects into the web page.
