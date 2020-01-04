@@ -3,7 +3,7 @@ import web3 from "./web3";
 /***
  * The following contract address and ABI are for a deployment of the Lottery contract made to the
  * Rinkeby Test Network. The contract itself was compiled using version 0.5.15 of the Solidity
- * compiler and NOT the latest compiler version, 0.6.0.
+ * compiler and NOT the latest compiler version, 0.6.1.
  *
  * See https://github.com/owanhunte/ethereum-solidity-course-updated-code/issues/2 for
  * further details on why.
