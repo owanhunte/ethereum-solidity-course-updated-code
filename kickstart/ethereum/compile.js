@@ -3,11 +3,12 @@ const solc = require("solc");
 const fs = require("fs-extra");
 
 const buildPath = path.resolve(__dirname, "build");
+const contractFileName = "Campaign.sol";
 
 // Delete the current build folder.
 fs.removeSync(buildPath);
 
-const campaignPath = path.resolve(__dirname, "contracts", "Campaign.sol");
+const campaignPath = path.resolve(__dirname, "contracts", contractFileName);
 const source = fs.readFileSync(campaignPath, "utf8");
 
 /***
@@ -20,11 +21,7 @@ const source = fs.readFileSync(campaignPath, "utf8");
  */
 const input = {
   language: "Solidity",
-  sources: {
-    "Campaign.sol": {
-      content: source
-    }
-  },
+  sources: {},
   settings: {
     outputSelection: {
       "*": {
@@ -33,9 +30,10 @@ const input = {
     }
   }
 };
+input.sources[contractFileName].content = source;
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
-const contracts = output.contracts["Campaign.sol"];
+const contracts = output.contracts[contractFileName];
 
 // Create the build folder.
 fs.ensureDirSync(buildPath);
