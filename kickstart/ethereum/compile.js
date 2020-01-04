@@ -30,7 +30,9 @@ const input = {
     }
   }
 };
-input.sources[contractFileName].content = source;
+input.sources[contractFileName] = {
+  content: source
+};
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
 const contracts = output.contracts[contractFileName];
