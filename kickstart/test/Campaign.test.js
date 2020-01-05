@@ -24,7 +24,7 @@ beforeEach(async () => {
    * However, when I set gas to 1500000 (1.5 million) the tests passed.
    */
   factory = await new web3.eth.Contract(compiledFactory.abi)
-    .deploy({ data: compiledFactory.evm.bytecode.object })
+    .deploy({ data: "0x" + compiledFactory.evm.bytecode.object })
     .send({ from: accounts[0], gas: "1500000" });
 
   await factory.methods.createCampaign("100").send({

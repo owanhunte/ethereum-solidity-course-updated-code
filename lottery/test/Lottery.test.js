@@ -15,7 +15,7 @@ beforeEach(async () => {
 
   // Use one of those accounts to deploy the contract.
   lottery = await new web3.eth.Contract(abi)
-    .deploy({ data: evm.bytecode.object })
+    .deploy({ data: "0x" + evm.bytecode.object })
     .send({ from: accounts[0], gas: "1000000" });
 });
 

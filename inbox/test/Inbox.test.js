@@ -15,7 +15,7 @@ beforeEach(async () => {
 
   // Use one of those accounts to deploy the contract.
   inbox = await new web3.eth.Contract(abi)
-    .deploy({ data: evm.bytecode.object, arguments: [message] })
+    .deploy({ data: "0x" + evm.bytecode.object, arguments: [message] })
     .send({ from: accounts[0], gas: "1000000" });
 });
 
