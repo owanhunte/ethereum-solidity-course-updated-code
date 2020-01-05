@@ -80,4 +80,42 @@ describe("Campaigns", () => {
     const request = await campaign.methods.requests(0).call();
     assert("Buy batteries", request.description);
   });
+
+  it("processes requests", async () => {
+    // Let accounts[1] contribute 10 ether to the campaign.
+    await campaign.methods.contribute().send({
+      value: web3.utils.toWei("10", "ether"),
+      from: accounts[1]
+    });
+
+    // Create a spend request for 5 ether to go to accounts[2].
+    await campaign.methods
+      .createRequest(
+        "A cool spend request",
+        web3.utils.toWei("5", "ether"),
+        accounts[2]
+      )
+      .send({
+        from: accounts[0],
+        gas: "1500000"
+      });
+
+    // Approve the spend request.
+    await campaign.methods.approveRequest(0).send({
+      from: accounts[1],
+      gas: "1500000"
+    });
+
+    // Finalize the request.
+    await campaign.methods.finalizeRequest(0).send({
+      from: accounts[0],
+      gas: "1500000"
+    });
+
+    let balance = await web3.eth.getBalance(accounts[2]);
+    balance = web3.utils.fromWei(balance, "ether");
+    balance = parseFloat(balance);
+
+    assert(balance > 104);
+  });
 });
