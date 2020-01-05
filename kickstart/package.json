@@ -9,6 +9,8 @@
   "author": "Owan Hunte",
   "license": "ISC",
   "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.28",
+    "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "ganache-cli": "^6.7.0",
     "mocha": "^7.0.0",
