@@ -34,18 +34,23 @@ This repository is being setup as a monorepo, so as to keep the updated versions
 
 The smart contracts created in the course are:
 
-- [The Inbox Contract](/inbox)
-- [The Lottery Contract](/lottery)
+- [The Inbox Contract](/inbox/contracts/Inbox.sol)
+- [The Lottery Contract](/lottery/contracts/Lottery.sol)
+- [The CampaignFactory and Campaign contracts](/kickstart/ethereum/contracts/Campaign.sol)
 
 ### Working with the latest React tooling
 
-The course sections that cover building out a front-end application using React make use of the previous approach of installing `create-react-app` globally via `npm install -g create-react-app`. This is no longer the recommended approach. As such if you have already used this command and installed `create-react-app` globally then you should uninstall the package using `npm uninstall -g create-react-app`. To create a new React app you may now use one of the following methods to ensure that you always use the latest React version:
+The course sections that cover building out a front-end application using React make use of outdated versions of _Create React App_ and _Next.js_.
+
+For Create React App, the previous approach of installing `create-react-app` globally via `npm install -g create-react-app` is no longer the recommended approach. As such if you have already used this command and installed `create-react-app` globally then you should uninstall the package using `npm uninstall -g create-react-app`. To create a new React app you may now use one of the following methods to ensure that you always use the latest React version:
 
 - **npx**: `npx create-react-app my-app`
 - **npm**: `npm init react-app my-app`
 - **Yarn**: `yarn create react-app my-app`
 
 For more details on the above methods, see [https://github.com/facebook/create-react-app](https://github.com/facebook/create-react-app).
+
+**For the CrowdCoin app install whatever version of Next.js is currently the latest version, not the outdated version shown in the course.**
 
 ### The lottery-react App
 
@@ -57,6 +62,7 @@ yarn create react-app lottery-react
 
 - [Browse the lottery-react App code files](/lottery-react)
 - [lottery-react App README](/lottery-react/project-readme/README.md)
+- [Browse the CrowdCoin Next.js app](/kickstart)
 
 ## Acknowledgement
 
