@@ -14,7 +14,11 @@ class CampaignIndex extends Component {
     const items = this.props.campaigns.map(campaign => {
       return {
         header: campaign,
-        description: <a>View Campaign</a>,
+        description: (
+          <Link href="/campaigns/[campaign]" as={`/campaigns/${campaign}`}>
+            <a>View Campaign</a>
+          </Link>
+        ),
         fluid: true,
         style: {
           marginLeft: "0"
@@ -31,12 +35,14 @@ class CampaignIndex extends Component {
         <div>
           <h3>Open Campaigns</h3>
           <Link href="/campaigns/new">
-            <Button
-              floated="right"
-              content="Create Campaign"
-              icon="add circle"
-              primary
-            />
+            <a>
+              <Button
+                floated="right"
+                content="Create Campaign"
+                icon="add circle"
+                primary
+              />
+            </a>
           </Link>
           {this.renderCampaigns()}
         </div>
