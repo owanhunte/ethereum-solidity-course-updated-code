@@ -12,11 +12,9 @@ I learned this the hard way as I was compiling using the 0.6.0 compiler when I s
 
 Up-to-date Solidity/web3.js/React code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
-**Note**: This is a work-in-progress as I have enrolled in but have not yet completed the abovementioned course.
-
 ## The Reason
 
-Earlier this year I became very interested in entering the blockchain development space and so I embarked on a journey to learn as much as I can, as quickly as I can, within this ever-evolving tech space we refer to as _Blockchain_, and to be more specific, the **Ethereum ecosystem**. Of course, I quickly realised that the development tools and packages being used to build, develop and deploy dApps and tech within this ecosystem all share a common trend: **rapid change and evolution, often introducing breaking changes through iterations of their releases**.
+Toward the end of 2019 I became very interested in entering the blockchain development space and so I embarked on a journey to learn as much as I can, as quickly as I can, within this ever-evolving tech space we refer to as _Blockchain_, and to be more specific, the **Ethereum ecosystem**. Of course, I quickly realised that the development tools and packages being used to build, develop and deploy dApps and tech within this ecosystem all share a common trend: **rapid change and evolution, often introducing breaking changes through iterations of their releases**.
 
 I make heavy use of the online learning website [udemy.com](https://www.udemy.com/) and find it to be a great supplementary learning tool. So naturally I bought a few courses on Ethereum and Solidity. The problem is, each of these courses target outdated versions of [Solidity](https://solidity.readthedocs.io/), [web3.js](https://web3js.readthedocs.io/) and [Truffle](https://www.trufflesuite.com/) in their course lessons and code examples. In the course creators' defense, remember, this is rapidly evolving tech we're dealing with here and the respective effort required to keep their video course content up-to-date with current software releases can be rather challenging.
 
@@ -24,11 +22,11 @@ _And so, that's where I decided to lend a bit of a helping hand_.
 
 ## Let the Code speak
 
-I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I am finding most enjoyable and acceptable so far.
+I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I found most enjoyable and acceptable so far.
 
 ## Repository structure
 
-This repository is being setup as a monorepo, so as to keep the updated versions of the isolated bits of the course's code and tests well organized all within a single repository.
+This repository was setup as a monorepo, so as to keep the updated versions of the isolated bits of the course's code and tests well organized all within a single repository.
 
 ### Smart Contracts
 
@@ -62,7 +60,11 @@ yarn create react-app lottery-react
 
 - [Browse the lottery-react App code files](/lottery-react)
 - [lottery-react App README](/lottery-react/project-readme/README.md)
-- [Browse the CrowdCoin Next.js app](/kickstart)
+
+### The Kickstart/CrowdCoin App
+
+- [Browse the CrowdCoin app code files](/kickstart)
+- [Live Demo of the app](https://kickstart.owanh.now.sh/)
 
 ## Acknowledgement
 
