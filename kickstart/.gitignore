@@ -7,4 +7,5 @@ npm-debug.log*
 Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
+.next
 .env

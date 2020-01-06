@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "Owan Hunte",
   "license": "ISC",
@@ -14,6 +17,11 @@
     "fs-extra": "^8.1.0",
     "ganache-cli": "^6.7.0",
     "mocha": "^7.0.0",
+    "next": "^9.1.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
     "solc": "^0.5.15",
     "web3": "^1.2.4"
   }
