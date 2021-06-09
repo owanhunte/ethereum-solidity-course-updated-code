@@ -1,7 +1,7 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
 **Update In Progress...**
-_Hi all, it's been a long time coming but I've finally gotten around to putting some time into bringing this repo up-to-date. I have started by renaming the default branch from `master` to `main`, and I created a new branch named `update_solidity_0_8` which I'll be committing all the updated code to. Once finished, the `update_solidity_0_8` branch will be merged back into the `main` branch._
+_Hi all, it's been a long time coming but I've finally gotten around to putting some time into bringing this repo up-to-date. I have started by renaming the default branch from `master` to `main`, and I created a new branch named [`update_solidity_0_8`](https://github.com/owanhunte/ethereum-solidity-course-updated-code/tree/update_solidity_0_8) which I'll be committing all the updated code to. As I make progress, I'll be merging this branch back into the `main` branch._
 
 **========= FOREWORD: Important Solidity compiler version note (MUST READ!!) =========**
 
