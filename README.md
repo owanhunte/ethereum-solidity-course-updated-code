@@ -43,7 +43,7 @@ The smart contracts created in the course are:
 
 The course sections that cover building out a front-end application using React make use of outdated versions of [_Create React App_](https://create-react-app.dev) and [_Next.js_](https://nextjs.org).
 
-For Create React App, the previous approach of installing `create-react-app` globally via `npm install -g create-react-app` is no longer the recommended approach. As such if you have already used this command and installed `create-react-app` globally then you should uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app`. To create a new React app you may now use one of the following methods to ensure that you always use the latest React version:
+For Create React App, the previous approach of installing globally via `npm install -g create-react-app` is no longer the recommended approach. As such if you have already used this command and installed create-react-app globally then you should uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app`. To create a new React app you may now use one of the following methods to ensure that you always use the latest React version:
 
 - **npx**: `npx create-react-app my-app`
 - **npm**: `npm init react-app my-app`
