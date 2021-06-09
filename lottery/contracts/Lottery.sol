@@ -17,12 +17,17 @@ contract Lottery {
         players.push(msg.sender);
     }
 
-    function random() private view returns (uint) {
-        return uint(keccak256(abi.encodePacked(block.difficulty, block.number, players)));
+    function random() private view returns (uint256) {
+        return
+            uint256(
+                keccak256(
+                    abi.encodePacked(block.difficulty, block.number, players)
+                )
+            );
     }
 
     function pickWinner() public onlyOwner {
-        uint index = random() % players.length;
+        uint256 index = random() % players.length;
         address contractAddress = address(this);
         players[index].transfer(contractAddress.balance);
         players = new address payable[](0);
@@ -33,10 +38,7 @@ contract Lottery {
     }
 
     modifier onlyOwner() {
-        require(
-            msg.sender == manager,
-            "Only owner can call this function."
-        );
+        require(msg.sender == manager, "Only owner can call this function.");
         _;
     }
 }
