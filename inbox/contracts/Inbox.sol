@@ -2,7 +2,7 @@
 pragma solidity >=0.5.0 <0.9.0;
 
 contract Inbox {
-    // The keyword public automatically generates a function that
+    // The keyword `public` automatically generates a function that
     // allows you to access the current value of the state variable
     // from outside of the contract (see lines 22 - 28).
     string public message;
@@ -23,7 +23,7 @@ contract Inbox {
     // keyword `public`, the compiler automatically generates a getter
     // function for us equivalent to:
     //
-    // function message() external view returns (string) { return message; }
+    // function message() external view returns (string memory) { return message; }
     //
     // ...so we do **NOT** need to define a getter function ourselves.
 }
