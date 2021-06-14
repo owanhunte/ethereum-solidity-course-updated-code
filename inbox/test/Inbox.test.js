@@ -1,7 +1,10 @@
 const assert = require("assert");
 const ganache = require("ganache-cli");
 const Web3 = require("web3");
+
+// Note: "Web3.givenProvider" will be set if in an Ethereum supported browser.
 const provider = Web3.givenProvider || ganache.provider();
+
 const web3 = new Web3(provider);
 const { abi, evm } = require("../compile");
 
@@ -26,7 +29,7 @@ describe("Inbox", () => {
 
   it("has a default message", async () => {
     const msg = await inbox.methods.message().call();
-    assert.equal(msg, message);
+    assert.strictEqual(msg, message);
   });
 
   it("can change the message", async () => {
@@ -34,6 +37,6 @@ describe("Inbox", () => {
     await inbox.methods.setMessage(newMsg).send({ from: accounts[0] });
 
     const msg = await inbox.methods.message().call();
-    assert.equal(msg, newMsg);
+    assert.strictEqual(msg, newMsg);
   });
 });
