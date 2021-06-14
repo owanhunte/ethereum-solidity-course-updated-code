@@ -1,10 +1,11 @@
-pragma solidity >=0.5.0 <0.7.0;
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.5.0 <0.9.0;
 
 contract Lottery {
     address public manager;
     address payable[] public players;
 
-    constructor() public {
+    constructor() {
         manager = msg.sender;
     }
 
@@ -14,7 +15,7 @@ contract Lottery {
             "A minimum payment of .01 ether must be sent to enter the lottery"
         );
 
-        players.push(msg.sender);
+        players.push(payable(msg.sender));
     }
 
     function random() private view returns (uint256) {
