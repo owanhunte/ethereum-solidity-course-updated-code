@@ -1,6 +1,7 @@
 {
-  "solidity.compileUsingRemoteVersion": "v0.8.4+commit.c7e474f2",
+  "solidity.compileUsingRemoteVersion": "v0.8.5+commit.a4f2e591",
   "conventionalCommits.scopes": [
-    "Inbox.sol"
+    "Inbox.sol",
+    "readme"
   ]
 }
