@@ -1,100 +1,234 @@
-import React from "react";
-import lotteryContract from "./utils/lottery";
-import web3 from "./utils/web3";
+import { useEffect, useRef, useState } from "react";
+import initWeb3 from "./utils/web3";
+import { abi, contractAddress } from "./utils/lottery";
+import "./App.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      manager: "",
-      players: [],
-      balance: "",
-      value: "",
-      message: ""
+const { ethereum } = window;
+
+function App() {
+  const lotteryContract = useRef(null);
+  const [web3, setWeb3] = useState(null);
+  const [doneCheckingForMetaMask, setDoneCheckingForMetaMask] = useState(false);
+  const [connected, setConnected] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+
+  const [manager, setManager] = useState("");
+  const [players, setPlayers] = useState([]);
+  const [balance, setBalance] = useState("");
+  const [value, setValue] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [enteringLottery, setEnteringLottery] = useState(false);
+  const [pickingWinner, setPickingWinner] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function initWeb3WithProvider() {
+      if (web3 === null) {
+        if (!cancelled) {
+          setDoneCheckingForMetaMask(false);
+          const web3Instance = await initWeb3();
+          setWeb3(web3Instance);
+          setDoneCheckingForMetaMask(true);
+
+          if (web3Instance !== null) {
+            // Create Contract JS object.
+            lotteryContract.current = new web3Instance.eth.Contract(abi, contractAddress);
+
+            // Check to see if user is already connected.
+            try {
+              const accounts = await ethereum.request({ method: "eth_accounts" });
+              if (accounts.length > 0 && ethereum.isConnected()) {
+                setConnected(true);
+              }
+            } catch (error) {
+              console.error(error);
+            }
+
+            // Implement `accountsChanged` event handler.
+            ethereum.on("accountsChanged", handleAccountsChanged);
+          }
+        }
+      }
+    }
+
+    initWeb3WithProvider();
+
+    return () => {
+      cancelled = true;
     };
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  async componentDidMount() {
-    const manager = await lotteryContract.methods.manager().call();
-    this.setState({ manager });
-    await this.updatePlayersListAndBalance();
-  }
+  useEffect(() => {
+    let cancelled = false;
 
-  onSubmit = async event => {
-    event.preventDefault();
-    const accounts = await web3.eth.getAccounts();
-    this.showMessage("Waiting on transaction success...");
-    await lotteryContract.methods.enter().send({
-      from: accounts[0],
-      value: web3.utils.toWei(this.state.value, "ether")
-    });
-    this.showMessage("You have been entered!");
-    this.updatePlayersListAndBalance();
+    if (connected) {
+      async function handler() {
+        const manager = await lotteryContract.current.methods.manager().call();
+        if (!cancelled) {
+          setManager(manager);
+          await updatePlayersListAndBalance();
+        }
+      }
+      handler();
+    }
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connected]);
+
+  const getAccount = async (_event) => {
+    setConnecting(true);
+    try {
+      await ethereum.request({ method: "eth_requestAccounts" });
+    } catch (error) {}
+    setConnecting(false);
   };
 
-  onClick = async event => {
-    event.preventDefault();
-    const accounts = await web3.eth.getAccounts();
-    this.showMessage("Waiting on transaction success...");
-    await lotteryContract.methods.pickWinner().send({
-      from: accounts[0]
-    });
-    this.showMessage("A winner has been picked!");
-    this.updatePlayersListAndBalance();
+  const handleAccountsChanged = (_accounts) => {
+    window.location.reload();
   };
 
   /**
-   * Improvement to course version: Method to update players list and balance
-   * in the page view without the user having to perform a manual page reload.
+   * Define a function to update players list and balance in the page view
+   * without the user having to perform a manual page reload.
    */
-  updatePlayersListAndBalance = async () => {
-    const players = await lotteryContract.methods.getPlayers().call();
-    const balance = await web3.eth.getBalance(lotteryContract.options.address);
-    this.setState({ players, balance });
+  const updatePlayersListAndBalance = async () => {
+    const players = await lotteryContract.current.methods.getPlayers().call();
+    const balance = await web3.eth.getBalance(lotteryContract.current.options.address);
+    setPlayers(players);
+    setBalance(balance);
   };
 
-  showMessage = async msg => {
-    this.setState({ message: msg });
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setEnteringLottery(true);
+    const accounts = await web3.eth.getAccounts();
+    showMessage("Waiting on transaction success...");
+    await lotteryContract.current.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei(value, "ether")
+    });
+    showMessage("You have been entered!");
+    updatePlayersListAndBalance();
+    setEnteringLottery(false);
   };
 
-  render() {
-    return (
-      <div>
-        <h2>Lottery Contract</h2>
-        <p>
-          This contract is managed by {this.state.manager}.
-          {this.state.players.length === 1
-            ? ` There is currently ${this.state.players.length} person entered, `
-            : ` There are currently ${this.state.players.length} people entered, `}
-          competing to win {web3.utils.fromWei(this.state.balance, "ether")}{" "}
-          ether!
-        </p>
+  const pickWinner = async (event) => {
+    event.preventDefault();
+    setPickingWinner(true);
+    const accounts = await web3.eth.getAccounts();
+    showMessage("Waiting on transaction success...");
+    await lotteryContract.current.methods.pickWinner().send({
+      from: accounts[0]
+    });
+    showMessage("A winner has been picked!");
+    updatePlayersListAndBalance();
+    setPickingWinner(false);
+  };
 
-        <hr />
+  const showMessage = async (msg) => {
+    setMessage(msg);
+  };
 
-        <form onSubmit={this.onSubmit}>
-          <h4>Want to try your luck?</h4>
-          <div>
-            <label>Amount of ether to enter:</label>{" "}
-            <input
-              value={this.state.value}
-              onChange={event => this.setState({ value: event.target.value })}
-            />{" "}
-            <button>Enter</button>
+  return (
+    <div className="App">
+      {web3 === null && doneCheckingForMetaMask && (
+        <div className="page-center">
+          <div className="alert error">
+            <h1 className="no-margin-top">Lottery Contract</h1>
+            <p className="no-margin">
+              MetaMask is required to run this app! Please install MetaMask and then refresh this
+              page.
+            </p>
           </div>
-        </form>
+        </div>
+      )}
 
-        <hr />
+      {web3 === null && !doneCheckingForMetaMask && (
+        <div className="page-center">
+          <div className="alert info">
+            <h1 className="no-margin-top">Lottery Contract</h1>
+            <p className="no-margin">Checking for MetaMask Ethereum Provider...</p>
+          </div>
+        </div>
+      )}
 
-        <h4>Ready to pick a winner?</h4>
-        <button onClick={this.onClick}>Pick a winner!</button>
+      {web3 !== null && !connected && (
+        <div className="page-center">
+          <section className="card">
+            <h1 className="no-margin-top">Lottery Contract</h1>
+            <p>
+              Want to try your luck in the lottery? Connect with MetaMask and start competing right
+              away!
+            </p>
+            <div className="center">
+              <button
+                className="btn primaryBtn"
+                type="button"
+                onClick={getAccount}
+                disabled={connecting}
+              >
+                Connect with MetaMask
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
 
-        <hr />
+      {web3 !== null && connected && (
+        <div className="page-center">
+          <section className="card">
+            <h1 className="no-margin-top">Lottery Contract</h1>
+            <p>
+              This contract is managed by {manager}.
+              {players.length === 1
+                ? ` There is currently ${players.length} person entered, `
+                : ` There are currently ${players.length} people entered, `}
+              competing to win {web3.utils.fromWei(balance, "ether")} ether!
+            </p>
 
-        <h2>{this.state.message}</h2>
-      </div>
-    );
-  }
+            <hr />
+
+            <form onSubmit={onSubmit}>
+              <h4>Want to try your luck?</h4>
+              <div>
+                <label>Amount of ether to enter:</label>{" "}
+                <input value={value} onChange={(event) => setValue(event.target.value)} />{" "}
+                <button className="btn primaryBtn" type="submit" disabled={enteringLottery}>
+                  Enter
+                </button>
+              </div>
+            </form>
+
+            {manager.toLowerCase() === ethereum.selectedAddress && (
+              <>
+                <hr />
+
+                <h4>Ready to pick a winner?</h4>
+                <button
+                  className="btn primaryBtn"
+                  type="button"
+                  onClick={pickWinner}
+                  disabled={pickingWinner}
+                >
+                  Pick a winner!
+                </button>
+              </>
+            )}
+
+            <hr className="spacey" />
+
+            <h2>{message}</h2>
+          </section>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;

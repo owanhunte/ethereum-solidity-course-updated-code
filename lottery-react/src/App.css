@@ -1,38 +1,110 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+  width: 100%;
+}
+
+.page-center {
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: rgb(47, 47, 47);
+  padding: 23px 30px 25px;
+  font-size: 1rem;
+  max-width: 500px;
+}
+
+.info {
+  border-color: rgb(206, 206, 206);
+  background-color: rgb(190, 227, 248);
+}
+
+.error {
+  background-color: rgb(254, 215, 215);
+  border-color: rgb(165, 42, 42);
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.center {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+hr.spacey {
+  margin: 22px 0 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn {
+  border: none;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  padding: 13px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.btn[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.primaryBtn {
+  background-color: rgb(3, 125, 214);
+}
+
+.card {
+  background-color: rgb(247, 247, 247);
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  padding: 25px 30px 30px;
+  max-width: 768px;
+  text-align: left;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  padding-bottom: 16px;
+}
+
+form div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+form div * {
+  display: inline-block;
+  margin-right: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form div *:last-child {
+  margin-right: 0;
+}
+
+form input {
+  border: 1px solid #cecece;
+  border-radius: 2px;
+  height: 40px;
+  width: 300px;
 }

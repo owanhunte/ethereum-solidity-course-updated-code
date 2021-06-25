@@ -1,42 +1,65 @@
+import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 
-let web3;
-
 /**
- * MetaMask provides the Ethereum Provider API (window.ethereum) for developers
- * to work with. Note that it's window.web3 API will be deprecated in the near future
- * in favor of the window.ethereum API.
+ * IMPORTANT!! My implementation here is very different to what is given in
+ * the course code. Students attempting to learn from my solution should
+ * take note of the following:
  *
- * See https://metamask.github.io/metamask-docs/API_Reference/Ethereum_Provider
- * for more details on the Ethereum Provider API.
+ * 1) I'm making use of the @metamask/detect-provider utility for detecting
+ *    the MetaMask Ethereum provider and enforcing that MetaMask be used, as
+ *    opposed to some other ethereum-compatible browser (via options.mustBeMetaMask).
+ *
+ *    See https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
+ *    for more details on using the Ethereum Provider API.
+ *
+ * 2) Unlike the approach the course takes where it automatically initiates a
+ *    connection request to access the user's Ethereum account(s) when the app
+ *    is loaded, I take the recommended approach to only initiate a connection
+ *    request in response to direct user action, such as clicking a button.
+ *
+ *    See https://docs.metamask.io/guide/getting-started.html#connecting-to-metamask
+ *
+ * 3) MetaMask provides the Ethereum Provider API (window.ethereum) for developers
+ *    to work with. Note that in January 2021 the former window.web3 API was
+ *    removed in favor of the window.ethereum API.
+ *
+ * 4) This file exports an async function instead of an actual web3 reference to
+ *    allow the web3 instance to be created asynchronously and stored in React state.
  */
-if (typeof window.ethereum !== "undefined") {
-  // Ethereum user detected. Let's use the injected provider.
-  web3 = new Web3(window.ethereum);
+const initWeb3 = async () => {
+  let web3 = null;
 
-  if (typeof window.ethereum.autoRefreshOnNetworkChange !== "undefined") {
-    window.ethereum.autoRefreshOnNetworkChange = false;
-  }
-
-  window.ethereum.on("chainChanged", () => {
-    document.location.reload();
+  // Get the provider, or null if it couldn't be detected.
+  const provider = await detectEthereumProvider({
+    mustBeMetaMask: true
   });
 
-  // Request approval from the user to use an ethereum address they can be identified by.
-  window.ethereum
-    .enable()
-    .then(_accounts => {
-      // no need to do anything here
-    })
-    .catch(function(error) {
-      // Handle error. Likely the user rejected the login.
-      console.error(error);
-      alert(
-        "Sorry, this application requires user approval to function correctly."
-      );
-    });
-} else {
-  web3 = new Web3(window.web3.currentProvider);
-}
+  if (provider) {
+    console.log("MetaMask Ethereum provider successfully detected!");
 
-export default web3;
+    // TODO: Do we need to assert that the user is on the Rinkeby network
+    // and prevent them from switching to any other network?
+
+    const { ethereum } = window;
+    web3 = new Web3(provider);
+
+    // Reload the page when the currently connected chain changes.
+    ethereum.on("chainChanged", (_chainId) => {
+      window.location.reload();
+    });
+
+    ethereum.on("disconnect", (_error) => {
+      window.location.reload();
+    });
+
+    // Code to initiate connection request to user's Ethereum account(s) moved
+    // to `src/App.js`, and only run in response to direct user action.
+  } else {
+    console.log("Please install MetaMask!");
+  }
+
+  return web3;
+};
+
+export default initWeb3;

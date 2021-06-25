@@ -1,36 +1,30 @@
-import web3 from "./web3";
-
 /***
  * The following contract address and ABI are for a deployment of the Lottery contract made to the
- * Rinkeby Test Network. The contract itself was compiled using version 0.5.15 of the Solidity
- * compiler and NOT the latest compiler version, 0.6.1.
+ * Rinkeby Test Network. The contract itself was compiled using version 0.8.5 of the Solidity
+ * compiler.
  *
- * See https://github.com/owanhunte/ethereum-solidity-course-updated-code/issues/2 for
- * further details on why.
- *
- * Rename this file to lottery.js and update the contractAddress and abi variables to those for
- * your own deployed contract.
+ * NOTE: Update the contractAddress and abi variables to those for your own deployed contract.
  */
-const contractAddress = "0x9972A7b3e63fD6cB184445a7888F78BC630dC4E7";
 
-const abi = [
+export const contractAddress = "0xB3493F8C137DaEb3A10bF99760AE2c574c375373";
+
+export const abi = [
   {
     inputs: [],
-    payable: false,
     stateMutability: "nonpayable",
-    type: "constructor"
+    type: "constructor",
+    signature: "constructor"
   },
   {
-    constant: false,
     inputs: [],
     name: "enter",
     outputs: [],
-    payable: true,
     stateMutability: "payable",
-    type: "function"
+    type: "function",
+    payable: true,
+    signature: "0xe97dcb62"
   },
   {
-    constant: true,
     inputs: [],
     name: "getPlayers",
     outputs: [
@@ -40,12 +34,12 @@ const abi = [
         type: "address[]"
       }
     ],
-    payable: false,
     stateMutability: "view",
-    type: "function"
+    type: "function",
+    constant: true,
+    signature: "0x8b5b9ccc"
   },
   {
-    constant: true,
     inputs: [],
     name: "manager",
     outputs: [
@@ -55,21 +49,20 @@ const abi = [
         type: "address"
       }
     ],
-    payable: false,
     stateMutability: "view",
-    type: "function"
+    type: "function",
+    constant: true,
+    signature: "0x481c6a75"
   },
   {
-    constant: false,
     inputs: [],
     name: "pickWinner",
     outputs: [],
-    payable: false,
     stateMutability: "nonpayable",
-    type: "function"
+    type: "function",
+    signature: "0x5d495aea"
   },
   {
-    constant: true,
     inputs: [
       {
         internalType: "uint256",
@@ -85,10 +78,9 @@ const abi = [
         type: "address"
       }
     ],
-    payable: false,
     stateMutability: "view",
-    type: "function"
+    type: "function",
+    constant: true,
+    signature: "0xf71d96cb"
   }
 ];
-
-export default new web3.eth.Contract(abi, contractAddress);
