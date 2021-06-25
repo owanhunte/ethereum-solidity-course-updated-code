@@ -43,7 +43,7 @@ For Create React App, the previous approach of installing globally via `npm inst
 
 For more details on the above methods, see [https://create-react-app.dev/docs/getting-started](https://create-react-app.dev/docs/getting-started).
 
-**For the CrowdCoin app I used the latest version of Next.js when I created this repo, and this is being updated to the currently latest version of Next.js (10.2.3) as part of my current efforts to bring this repo up-to-date.**
+**For the CrowdCoin app I used the latest version of Next.js when I created this repo, and this is being updated to the currently latest version of Next.js (v11) as part of my current efforts to bring this repo up-to-date.**
 
 ### The lottery-react App
 
