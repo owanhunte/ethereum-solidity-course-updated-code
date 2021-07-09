@@ -12,19 +12,22 @@ import Web3 from "web3";
  *
  *    See https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
  *    for more details on using the Ethereum Provider API.
+ * 
+ * 2) Even if MetaMask is installed and the Ethereum provider detected, App.js
+ *    enforces a requirement that the user MUST be on the Rinkeby test network.
  *
- * 2) Unlike the approach the course takes where it automatically initiates a
+ * 3) Unlike the approach the course takes where it automatically initiates a
  *    connection request to access the user's Ethereum account(s) when the app
  *    is loaded, I take the recommended approach to only initiate a connection
  *    request in response to direct user action, such as clicking a button.
  *
  *    See https://docs.metamask.io/guide/getting-started.html#connecting-to-metamask
  *
- * 3) MetaMask provides the Ethereum Provider API (window.ethereum) for developers
+ * 4) MetaMask provides the Ethereum Provider API (window.ethereum) for developers
  *    to work with. Note that in January 2021 the former window.web3 API was
  *    removed in favor of the window.ethereum API.
  *
- * 4) This file exports an async function instead of an actual web3 reference to
+ * 5) This file exports an async function instead of an actual web3 reference to
  *    allow the web3 instance to be created asynchronously and stored in React state.
  */
 const initWeb3 = async () => {
@@ -37,9 +40,6 @@ const initWeb3 = async () => {
 
   if (provider) {
     console.log("MetaMask Ethereum provider successfully detected!");
-
-    // TODO: Do we need to assert that the user is on the Rinkeby network
-    // and prevent them from switching to any other network?
 
     const { ethereum } = window;
     web3 = new Web3(provider);

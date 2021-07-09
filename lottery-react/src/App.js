@@ -11,6 +11,7 @@ function App() {
   const [doneCheckingForMetaMask, setDoneCheckingForMetaMask] = useState(false);
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
+  const [isRinkebyChain, setIsRinkebyChain] = useState(false);
 
   const [manager, setManager] = useState("");
   const [players, setPlayers] = useState([]);
@@ -30,6 +31,13 @@ function App() {
           setDoneCheckingForMetaMask(false);
           const web3Instance = await initWeb3();
           setWeb3(web3Instance);
+
+          // Transactions done in this app must be done on the Rinkeby test network.
+          const chainId = await ethereum.request({ method: 'eth_chainId' });
+          if (chainId === "0x4") {
+            setIsRinkebyChain(true);
+          }
+
           setDoneCheckingForMetaMask(true);
 
           if (web3Instance !== null) {
@@ -137,6 +145,15 @@ function App() {
 
   return (
     <div className="App">
+      {web3 === null && !doneCheckingForMetaMask && (
+        <div className="page-center">
+          <div className="alert info">
+            <h1 className="no-margin-top">Lottery Contract</h1>
+            <p className="no-margin">Checking for MetaMask Ethereum Provider...</p>
+          </div>
+        </div>
+      )}
+
       {web3 === null && doneCheckingForMetaMask && (
         <div className="page-center">
           <div className="alert error">
@@ -149,16 +166,19 @@ function App() {
         </div>
       )}
 
-      {web3 === null && !doneCheckingForMetaMask && (
+      {web3 !== null && doneCheckingForMetaMask && !isRinkebyChain && (
         <div className="page-center">
-          <div className="alert info">
+          <div className="alert error">
             <h1 className="no-margin-top">Lottery Contract</h1>
-            <p className="no-margin">Checking for MetaMask Ethereum Provider...</p>
+            <p className="no-margin">
+              You must be connected to the <strong>Rinkeby test network</strong> for Ether
+              transactions made via this app.
+            </p>
           </div>
         </div>
       )}
 
-      {web3 !== null && !connected && (
+      {web3 !== null && !connected && isRinkebyChain && (
         <div className="page-center">
           <section className="card">
             <h1 className="no-margin-top">Lottery Contract</h1>
@@ -180,7 +200,7 @@ function App() {
         </div>
       )}
 
-      {web3 !== null && connected && (
+      {web3 !== null && connected && isRinkebyChain && (
         <div className="page-center">
           <section className="card">
             <h1 className="no-margin-top">Lottery Contract</h1>
