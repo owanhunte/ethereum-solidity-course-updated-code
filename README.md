@@ -54,7 +54,8 @@ yarn create react-app lottery-react
 ```
 
 - [Browse the lottery-react App code files](/lottery-react)
-- [lottery-react App README](/lottery-react/project-readme/README.md)
+- [lottery-react App README](/lottery-react/README.md)
+- [Live Demo of the app](https://lottery-react.onrender.com)
 
 ### The Kickstart/CrowdCoin App
 
