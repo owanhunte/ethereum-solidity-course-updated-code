@@ -2,8 +2,8 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 
 /**
- * IMPORTANT!! My implementation here is very different to what is given in
- * the course code. Students attempting to learn from my solution should
+ * IMPORTANT!! My implementation here is somewhat different from what is given
+ * in the course code. Students attempting to learn from my solution should
  * take note of the following:
  *
  * 1) I'm making use of the @metamask/detect-provider utility for detecting
