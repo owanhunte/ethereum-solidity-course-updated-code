@@ -145,6 +145,17 @@ function App() {
 
   return (
     <div className="App">
+      {/* This alert can be removed if you're not planning on doing a deployment of this app. */}
+      <div className="test-site-msg">
+        This is a test-only deployment of the{" "}
+        <a href="https://github.com/owanhunte/ethereum-solidity-course-updated-code/tree/main/lottery-react">
+          Lottery React app
+        </a>, based on the udemy.com course{" "}
+        <a href="https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/">
+          Ethereum and Solidity: The Complete Developer's Guide
+        </a>. Ether transactions from this app run on the <em>Rinkeby test network only</em>.
+      </div>
+
       {web3 === null && !doneCheckingForMetaMask && (
         <div className="page-center">
           <div className="alert info">

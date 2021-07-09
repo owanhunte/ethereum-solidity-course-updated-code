@@ -6,11 +6,21 @@
   width: 100%;
 }
 
+.test-site-msg {
+  background-color: rgb(245, 245, 220);
+  border-bottom: 1px solid rgb(221, 221, 221);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px 18px;
+  text-align: left;
+}
+
 .page-center {
   display: flex;
   flex: 1 1 0%;
   align-items: center;
   justify-content: center;
+  padding: 20px 0;
 }
 
 .alert {
