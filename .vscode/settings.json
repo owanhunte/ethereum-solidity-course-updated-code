@@ -3,6 +3,8 @@
   "conventionalCommits.scopes": [
     "Inbox.sol",
     "readme",
-    "Lottery"
+    "Lottery",
+    "lottery-react",
+    "CrowdCoin"
   ]
 }
