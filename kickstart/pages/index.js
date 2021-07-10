@@ -1,54 +1,16 @@
-import React, { Component } from "react";
-import { Card, Button } from "semantic-ui-react";
-import Link from "next/link";
-import factory from "../ethereum/factory";
-import Layout from "../components/Layout";
+import Head from "next/head";
 
-class CampaignIndex extends Component {
-  static async getInitialProps() {
-    const campaigns = await factory.methods.getDeployedCampaigns().call();
-    return { campaigns };
-  }
-
-  renderCampaigns() {
-    const items = this.props.campaigns.map(campaign => {
-      return {
-        header: campaign,
-        description: (
-          <Link href="/campaigns/[campaign]" as={`/campaigns/${campaign}`}>
-            <a>View Campaign</a>
-          </Link>
-        ),
-        fluid: true,
-        style: {
-          marginLeft: "0"
-        }
-      };
-    });
-
-    return <Card.Group items={items} />;
-  }
-
-  render() {
-    return (
-      <Layout>
-        <div>
-          <h3>Open Campaigns</h3>
-          <Link href="/campaigns/new">
-            <a>
-              <Button
-                floated="right"
-                content="Create Campaign"
-                icon="add circle"
-                primary
-              />
-            </a>
-          </Link>
-          {this.renderCampaigns()}
-        </div>
-      </Layout>
-    );
-  }
+export default function CampaignIndex() {
+  return (
+    <div>
+      <Head>
+        <title>Kickstart/CrowdCoin App - by Owan Hunte</title>
+        <meta
+          name="description"
+          content="Based on the udemy.com course Ethereum and Solidity: The Complete Developer's Guide"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+    </div>
+  );
 }
-
-export default CampaignIndex;
