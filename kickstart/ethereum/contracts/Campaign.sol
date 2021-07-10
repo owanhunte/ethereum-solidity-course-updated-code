@@ -48,7 +48,7 @@ contract Campaign {
     // https://docs.soliditylang.org/en/v0.8.6/types.html?highlight=struct#structs
     //
     uint256 numRequests;
-    mapping(uint256 => Request) requests;
+    mapping(uint256 => Request) public requests;
 
     constructor(uint256 minimum, address creator) {
         manager = creator;
