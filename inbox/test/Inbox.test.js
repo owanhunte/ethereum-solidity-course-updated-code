@@ -1,10 +1,7 @@
 const assert = require("assert");
 const ganache = require("ganache-cli");
 const Web3 = require("web3");
-
-// Note: "Web3.givenProvider" will be set if in an Ethereum supported browser.
-const provider = Web3.givenProvider || ganache.provider();
-
+const provider = ganache.provider();
 const web3 = new Web3(provider);
 const { abi, evm } = require("../compile");
 
