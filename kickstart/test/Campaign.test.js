@@ -1,7 +1,7 @@
 const assert = require("assert");
 const ganache = require("ganache-cli");
 const Web3 = require("web3");
-const provider = Web3.givenProvider || ganache.provider();
+const provider = ganache.provider();
 const web3 = new Web3(provider);
 
 const compiledFactory = require("../ethereum/build/CampaignFactory.json");
@@ -44,7 +44,7 @@ describe("Campaigns", () => {
 
   it("marks caller as the campaign manager", async () => {
     const manager = await campaign.methods.manager().call();
-    assert.equal(manager, accounts[0]);
+    assert.strictEqual(manager, accounts[0]);
   });
 
   it("allows people to contribute money and marks them as approvers", async () => {
@@ -70,12 +70,10 @@ describe("Campaigns", () => {
   });
 
   it("allows a manager to make a payment request", async () => {
-    await campaign.methods
-      .createRequest("Buy batteries", "100", accounts[1])
-      .send({
-        from: accounts[0],
-        gas: "1500000"
-      });
+    await campaign.methods.createRequest("Buy batteries", "100", accounts[1]).send({
+      from: accounts[0],
+      gas: "1500000"
+    });
 
     const request = await campaign.methods.requests(0).call();
     assert("Buy batteries", request.description);
@@ -90,11 +88,7 @@ describe("Campaigns", () => {
 
     // Create a spend request for 5 ether to go to accounts[2].
     await campaign.methods
-      .createRequest(
-        "A cool spend request",
-        web3.utils.toWei("5", "ether"),
-        accounts[2]
-      )
+      .createRequest("A cool spend request", web3.utils.toWei("5", "ether"), accounts[2])
       .send({
         from: accounts[0],
         gas: "1500000"
