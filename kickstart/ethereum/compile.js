@@ -12,17 +12,19 @@ const campaignPath = path.resolve(__dirname, "contracts", contractFileName);
 const source = fs.readFileSync(campaignPath, "utf8");
 
 /***
- * Note: This part is a significant difference from what is shown in the Udemy course.
- * The approach here is the current recommended way to interface with the Solidity compiler,
- * which uses the so-called JSON-input-output interface.
+ * The recommended way to interface with the Solidity compiler, especially for more
+ * complex and automated setups is the so-called JSON-input-output interface.
  *
- * See https://solidity.readthedocs.io/en/v0.5.15/using-the-compiler.html#compiler-input-and-output-json-description
+ * See https://docs.soliditylang.org/en/v0.8.6/using-the-compiler.html#compiler-input-and-output-json-description
  * for more details.
  */
 const input = {
   language: "Solidity",
   sources: {},
   settings: {
+    metadata: {
+      useLiteralContent: true
+    },
     outputSelection: {
       "*": {
         "*": ["*"]
@@ -30,6 +32,7 @@ const input = {
     }
   }
 };
+
 input.sources[contractFileName] = {
   content: source
 };
@@ -44,9 +47,6 @@ fs.ensureDirSync(buildPath);
 for (let contract in contracts) {
   if (contracts.hasOwnProperty(contract)) {
     const element = contracts[contract];
-    fs.outputJsonSync(
-      path.resolve(buildPath, `${contract}.json`),
-      contracts[contract]
-    );
+    fs.outputJsonSync(path.resolve(buildPath, `${contract}.json`), contracts[contract]);
   }
 }
