@@ -22,7 +22,7 @@ contract Lottery {
         // Note: Although optional, it's a good practice to include error messages
         // in `require` calls.
         require(
-            msg.value > .01 ether,
+            msg.value > .01 ether 
             "A minimum payment of .01 ether must be sent to enter the lottery"
         );
 
