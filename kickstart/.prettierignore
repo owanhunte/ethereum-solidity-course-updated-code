@@ -1,0 +1,26 @@
+# dependencies folder/files:
+node_modules
+.pnp
+.pnp.js
+
+# artifacts:
+build
+coverage
+
+# next.js and vercel
+.next
+.vercel
+out
+
+# debug files:
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc:
+.DS_Store
+*.pem
+
+# env files:
+.env
+.env.*

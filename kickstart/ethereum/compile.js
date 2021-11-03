@@ -23,18 +23,18 @@ const input = {
   sources: {},
   settings: {
     metadata: {
-      useLiteralContent: true
+      useLiteralContent: true,
     },
     outputSelection: {
       "*": {
-        "*": ["*"]
-      }
-    }
-  }
+        "*": ["*"],
+      },
+    },
+  },
 };
 
 input.sources[contractFileName] = {
-  content: source
+  content: source,
 };
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
