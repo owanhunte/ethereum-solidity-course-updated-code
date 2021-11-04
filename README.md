@@ -5,7 +5,7 @@ _Hi all, it's been a long time coming but I've finally gotten around to putting 
 
 ## Purpose of this Repo
 
-Up-to-date Solidity/web3.js/React code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
+Up-to-date Solidity/web3.js/React/Next.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
 ## The Reason
 
