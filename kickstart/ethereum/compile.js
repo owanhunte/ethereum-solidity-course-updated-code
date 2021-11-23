@@ -46,7 +46,6 @@ fs.ensureDirSync(buildPath);
 // Extract and write the JSON representations of the contracts to the build folder.
 for (let contract in contracts) {
   if (contracts.hasOwnProperty(contract)) {
-    const element = contracts[contract];
     fs.outputJsonSync(path.resolve(buildPath, `${contract}.json`), contracts[contract]);
   }
 }
