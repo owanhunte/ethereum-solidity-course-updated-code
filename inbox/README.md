@@ -97,7 +97,7 @@ Note that with this change, we also use the `memory` keyword when declaring the 
 - Variables of type `string` are special arrays in Solidity. You can check out the official documentation on arrays [here](https://docs.soliditylang.org/en/v0.8.18/types.html#arrays).
 - Since `string`s are arrays we have to specifiy an explicit data location, so we specify the `memory` location. The Ethereum Virtual Machine (EVM) has three areas where it can store data: **storage**, **memory** and the **stack**. See https://docs.soliditylang.org/en/v0.8.18/introduction-to-smart-contracts.html#storage-memory-and-the-stack if you want to learn more about these data locations.
 
-Finally, we also add needed to add the `memory` data location to the `newMessage` parameter of the `setMessage` function.
+Finally, we also needed to add the `memory` data location to the `newMessage` parameter of the `setMessage` function.
 
 <p align="center"><hr /></p>
 
