@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity >=0.5.0 <0.9.0;
 
 contract Inbox {
@@ -7,7 +7,7 @@ contract Inbox {
     // from outside of the contract (see lines 22 - 28).
     string public message;
 
-    // Note: Removing `public` visibility specifier. Visibility (public / external)
+    // Note: Removing `public` visibility specifier. Visibility (public / internal)
     // is not needed for constructors anymore: To prevent a contract from being
     // created, it can be marked abstract. This makes the visibility concept
     // for constructors obsolete.
