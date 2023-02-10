@@ -13,7 +13,7 @@
 
 ## Inbox Smart Contract
 
-An up-to-date equivalent to Stephen's Inbox smart contract can be found [here](./contracts/Inbox.sol) and immediately below:
+An up-to-date equivalent to the course's Inbox smart contract can be found [here](./contracts/Inbox.sol) and immediately below:
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -94,14 +94,66 @@ constructor(string memory initialMessage) {
 
 Note that with this change, we also use the `memory` keyword when declaring the constructor's `initialMessage` string parameter. This is because, as of Solidity 0.5.0, explicit data location for all variables of struct, array or mapping types is now mandatory (see https://docs.soliditylang.org/en/latest/050-breaking-changes.html#explicitness-requirements), and this applies to function parameters and return variables as well. So just for the sake of a bit more clarity:
 
-- Variables of type `string` are special arrays in Solidity. You can check out the official documentation on arrays [here](https://docs.soliditylang.org/en/v0.8.18/types.html#arrays).
-- Since `string`s are arrays we have to specifiy an explicit data location, so we specify the `memory` location. The Ethereum Virtual Machine (EVM) has three areas where it can store data: **storage**, **memory** and the **stack**. See https://docs.soliditylang.org/en/v0.8.18/introduction-to-smart-contracts.html#storage-memory-and-the-stack if you want to learn more about these data locations.
+- Variables of type `string` are special arrays in Solidity. You can check out the official documentation on arrays [here](https://docs.soliditylang.org/en/latest/types.html#arrays).
+- Since `string`s are arrays we have to specifiy an explicit data location, so we specify the `memory` location. The Ethereum Virtual Machine (EVM) has three areas where it can store data: **storage**, **memory** and the **stack**. See https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#storage-memory-and-the-stack if you want to learn more about these data locations.
 
-Finally, we also needed to add the `memory` data location to the `newMessage` parameter of the `setMessage` function.
+The final change to the contract was to also add the `memory` data location to the `newMessage` parameter of the `setMessage` function.
 
 <p align="center"><hr /></p>
 
 ## Compile Script
+
+An up-to-date equivalent to the course's `compile.js` script for the Inbox contract can be found [here](./compile.js) and immediately below:
+
+```js
+const path = require("path");
+const fs = require("fs");
+const solc = require("solc");
+
+const inboxPath = path.resolve(__dirname, "contracts", "Inbox.sol");
+const source = fs.readFileSync(inboxPath, "utf8");
+
+const input = {
+  language: "Solidity",
+  sources: {
+    "Inbox.sol": {
+      content: source,
+    },
+  },
+  settings: {
+    metadata: {
+      useLiteralContent: true,
+    },
+    outputSelection: {
+      "*": {
+        "*": ["*"],
+      },
+    },
+  },
+};
+
+const output = JSON.parse(solc.compile(JSON.stringify(input)));
+
+module.exports = output.contracts["Inbox.sol"].Inbox;
+```
+
+There's alot to digest with respect to the changes made to this script to bring it up-to-date. So let's dive in and explain what's going on:
+
+### Compiler Input and Output JSON Description
+
+The recommended way to interface with the Solidity compiler, especially when developing more complex and automated setups is the so-called JSON-input-output interface. In summary, the compiler API expects a JSON formatted input and outputs the compilation result in a JSON formatted output. For details on this approach, including thorough descriptions of the input and output formats, check out the Solidity docs [here](https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-input-and-output-json-description).
+
+In our updated `compile.js` above, we declare a variable named `input` to hold a JavaScript object representation of the input that will be passed to the compiler after it's JSON stringified. In this object we define the single Solidity source file that has to be compiled, `Inbox.sol`, passing the fully loaded source code of the contract as the content source of the contract.
+
+The lines
+
+```js
+const output = JSON.parse(solc.compile(JSON.stringify(input)));
+
+module.exports = output.contracts["Inbox.sol"].Inbox;
+```
+
+parse the output returned by the call to `solc.compile(...)` and store it in the `output` variable. We then extract the `Inbox` contract object only and set that as the only export from `compile.js`.
 
 <p align="center"><hr /></p>
 

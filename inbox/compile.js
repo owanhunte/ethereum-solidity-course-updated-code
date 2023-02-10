@@ -9,7 +9,7 @@ const source = fs.readFileSync(inboxPath, "utf8");
  * The recommended way to interface with the Solidity compiler, especially for more
  * complex and automated setups is the so-called JSON-input-output interface.
  *
- * See https://docs.soliditylang.org/en/v0.8.5/using-the-compiler.html#compiler-input-and-output-json-description
+ * See https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-input-and-output-json-description
  * for more details.
  */
 const input = {
@@ -17,7 +17,7 @@ const input = {
   sources: {
     // Each Solidity source file to be compiled must be specified by defining either
     // a URL to the file or the literal file content.
-    // See https://docs.soliditylang.org/en/v0.8.5/using-the-compiler.html#input-description
+    // See https://docs.soliditylang.org/en/latest/using-the-compiler.html#input-description
     "Inbox.sol": {
       content: source
     }
