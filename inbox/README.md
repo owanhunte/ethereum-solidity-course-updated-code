@@ -6,8 +6,9 @@
 
 - [Inbox smart contract](#inbox-smart-contract)
 - [Compile Script](#compile-script)
-- [Deploy Script](#deploy-script)
+- [Update your package.json](#update-your-packagejson)
 - [Unit Tests](#unit-tests)
+- [Deploy Script](#deploy-script)
 
 <p align="center"><hr /></p>
 
@@ -117,19 +118,19 @@ const input = {
   language: "Solidity",
   sources: {
     "Inbox.sol": {
-      content: source,
-    },
+      content: source
+    }
   },
   settings: {
     metadata: {
-      useLiteralContent: true,
+      useLiteralContent: true
     },
     outputSelection: {
       "*": {
-        "*": ["*"],
-      },
-    },
-  },
+        "*": ["*"]
+      }
+    }
+  }
 };
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
@@ -157,8 +158,94 @@ parse the output returned by the call to `solc.compile(...)` and store it in the
 
 <p align="center"><hr /></p>
 
-## Deploy Script
+## Update your package.json
+
+Before I get into the unit tests and deploy script, I think it's important to first explain the updates that need to be made to this project's [package.json](./package.json), specificially the dependencies being used. **All** of the dependencies should be updated to their latest versions and the `ganache-cli` dependency replaced with `ganache`, since the `ganache-cli` package has been deprecated and is now just `ganache`.
+
+Here is what my package.json looks like:
+
+```json
+{
+  "name": "inbox",
+  "version": "2.0.2",
+  "description": "Inbox smart contract Node.js project.",
+  "main": "compile.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Owan Hunte",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.6",
+    "dotenv": "^16.0.3",
+    "solc": "^0.8.18",
+    "web3": "^1.8.2"
+  },
+  "devDependencies": {
+    "ganache": "^7.7.4",
+    "mocha": "^10.2.0"
+  }
+}
+```
+
+Note that I installed the `ganache` and `mocha` packages as development dependencies since both are only used in the [unit tests](./test/Inbox.test.js).
 
 <p align="center"><hr /></p>
 
 ## Unit Tests
+
+An up-to-date equivalent to the course's `Inbox.test.js` can be found [here](./test/Inbox.test.js) and is shown immediately below:
+
+```js
+const assert = require("assert");
+const ganache = require("ganache");
+const Web3 = require("web3");
+const provider = ganache.provider();
+const web3 = new Web3(provider);
+const { abi, evm } = require("../compile");
+
+const message = "Hi there!";
+let accounts;
+let inbox;
+
+beforeEach(async () => {
+  // Get a list of all accounts.
+  accounts = await web3.eth.getAccounts();
+
+  // Use one of those accounts to deploy the contract.
+  inbox = await new web3.eth.Contract(abi)
+    .deploy({ data: "0x" + evm.bytecode.object, arguments: [message] })
+    .send({ from: accounts[0], gas: "1000000" });
+});
+
+describe("Inbox", () => {
+  it("deploys a contract", () => {
+    assert.ok(inbox.options.address);
+  });
+
+  it("has a default message", async () => {
+    const msg = await inbox.methods.message().call();
+    assert.strictEqual(msg, message);
+  });
+
+  it("can change the message", async () => {
+    const newMsg = "bye";
+    await inbox.methods.setMessage(newMsg).send({ from: accounts[0] });
+
+    const msg = await inbox.methods.message().call();
+    assert.strictEqual(msg, newMsg);
+  });
+});
+```
+
+The main change with the above tests file is the line:
+
+```js
+const ganache = require("ganache");
+```
+
+which replaces the line from the course's version that uses the now deprecated `ganache-cli`.
+
+<p align="center"><hr /></p>
+
+## Deploy Script
