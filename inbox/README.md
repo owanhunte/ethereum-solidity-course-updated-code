@@ -14,7 +14,7 @@
 
 ## Inbox Smart Contract
 
-An up-to-date equivalent to the course's Inbox smart contract can be found [here](./contracts/Inbox.sol) and immediately below:
+An up-to-date equivalent to the course's Inbox smart contract can be found [here](./contracts/Inbox.sol) and is shown immediately below:
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -104,7 +104,7 @@ The final change to the contract was to also add the `memory` data location to t
 
 ## Compile Script
 
-An up-to-date equivalent to the course's `compile.js` script for the Inbox contract can be found [here](./compile.js) and immediately below:
+An up-to-date equivalent to the course's compile script for the Inbox contract can be found [here](./compile.js) and is shown immediately below:
 
 ```js
 const path = require("path");
@@ -160,7 +160,7 @@ parse the output returned by the call to `solc.compile(...)` and store it in the
 
 ## Update your package.json
 
-Before I get into the unit tests and deploy script, I think it's important to first explain the updates that need to be made to this project's [package.json](./package.json), specificially the dependencies being used. **All** of the dependencies should be updated to their latest versions and the `ganache-cli` dependency replaced with `ganache`, since the `ganache-cli` package has been deprecated and is now just `ganache`.
+Before I get into the unit tests and deploy script, I think it's important to first explain the updates that need to be made to this project's [package.json](./package.json), specificially the dependencies being used. **All** of the dependencies should be updated to their latest versions and the `ganache-cli` dependency replaced with `ganache`, since the `ganache-cli` package has been deprecated and is now just `ganache` (as explained [here](https://github.com/trufflesuite/ganache/blob/develop/UPGRADE-GUIDE.md)).
 
 Here is what my package.json looks like:
 
@@ -194,7 +194,7 @@ Note that I installed the `ganache` and `mocha` packages as development dependen
 
 ## Unit Tests
 
-An up-to-date equivalent to the course's `Inbox.test.js` can be found [here](./test/Inbox.test.js) and is shown immediately below:
+An up-to-date equivalent to the course's unit tests (`Inbox.test.js`) can be found [here](./test/Inbox.test.js) and is shown immediately below:
 
 ```js
 const assert = require("assert");
@@ -238,7 +238,7 @@ describe("Inbox", () => {
 });
 ```
 
-The main change with the above tests file is the line:
+There are 2 main changes happening with the above tests file. First we have the line:
 
 ```js
 const ganache = require("ganache");
@@ -246,6 +246,62 @@ const ganache = require("ganache");
 
 which replaces the line from the course's version that uses the now deprecated `ganache-cli`.
 
+Second, the line
+
+```js
+const { abi, evm } = require("../compile");`
+```
+
+imports the compiled `Inbox` contract object that the compile script exports and stores the `abi` and `evm` object values as variables. The import line which the course has, `const { interface, bytecode } = require("../compile");`, will not work with the latest Solidity compiler versions. The `abi` object replaces the `interface` object, and we can access the contract's bytecode object via `evm.bytecode.object`, as shown above.
+
 <p align="center"><hr /></p>
 
 ## Deploy Script
+
+An up-to-date equivalent to the course's deploy script for the Inbox contract can be found [here](./deploy.js) and is shown immediately below:
+
+```js
+require("dotenv").config();
+
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const Web3 = require("web3");
+const { abi, evm } = require("./compile");
+const mnemonicPhrase = process.env.ACCOUNT_MNEMONIC;
+const network = process.env.GOERLI_ENDPOINT;
+
+const provider = new HDWalletProvider({
+  mnemonic: {
+    phrase: mnemonicPhrase
+  },
+  providerOrUrl: network
+});
+
+const web3 = new Web3(provider);
+const message = "Hi there!";
+
+const deploy = async () => {
+  const accounts = await web3.eth.getAccounts();
+  console.log("Attempting to deploy from account", accounts[0]);
+
+  const result = await new web3.eth.Contract(abi)
+    .deploy({ data: "0x" + evm.bytecode.object, arguments: [message] })
+    .send({ from: accounts[0] });
+
+  console.log("Contract deployed to", result.options.address);
+  provider.engine.stop();
+};
+
+deploy();
+```
+
+The changes in this script from the course's version are as follows:
+
+- The line `const { abi, evm } = require("./compile");` replaces the `const { interface, bytecode } = require("./compile");` line that's found in the course example, and we access the bytecode object via `evm.bytecode.object`.
+- Instead of hard-coding the account mnemonic and Infura endpoint as is done in the course's deploy script, I'm storing and referencing these via environment variables.
+- A [Goerli Infura](https://app.infura.io) endpoint (stored in the `process.env.GOERLI_ENDPOINT` environment variable) is passed to `HDWalletProvider` instead of a Rinkeby endpoint since the Rinkeby network no longer exists. So when copying your endpoint from the Infura dashboard, remember to grab the Goerli Ethereum endpoint.
+- The `dotenv` package is used to read these environment variables from a `.env` file. Create that file locally in the root of this inbox folder and copy the contents of `.env.example` into your `.env` file. Set `ACCOUNT_MNEMONIC` and `GOERLI_ENDPOINT` in your `.env` file appropriately. **DO NOT use a mnemonic for an account/wallet with real money or Ether associated with it!**
+- To prevent the deployment from hanging, the statement `provider.engine.stop();` is added at the end of the `deploy` function definition.
+
+## That's all for now
+
+That about covers things where the updates to the Inbox smart contract and Node.js project are concerned. I sincerely hope my contributions prove useful to all students of the course who find their way to this repository.
