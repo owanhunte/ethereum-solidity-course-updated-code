@@ -49,7 +49,7 @@ The first line:
 // SPDX-License-Identifier: GPL-3.0-or-later
 ```
 
-is an [SPDX license identifier](https://docs.soliditylang.org/en/v0.6.8/layout-of-source-files.html?highlight=spdx#spdx-license-identifier), _introduced from Solidity 0.6.8_, which allows developers to specify the [license](https://spdx.org/licenses) the smart contract uses. **Every Solidity source file should start with a comment indicating its license** and it should be one of the identifiers listed at https://spdx.org/licenses. In this case I've specified that the smart contract uses the [GNU General Public License v3.0 or later](https://spdx.org/licenses/GPL-3.0-or-later.html)
+is an [SPDX license identifier](https://docs.soliditylang.org/en/latest/layout-of-source-files.html?highlight=spdx#spdx-license-identifier), _introduced from Solidity 0.6.8_, which allows developers to specify the [license](https://spdx.org/licenses) the smart contract uses. **Every Solidity source file should start with a comment indicating its license** and it should be one of the identifiers listed at https://spdx.org/licenses. In this case I've specified that the smart contract uses the [GNU General Public License v3.0 or later](https://spdx.org/licenses/GPL-3.0-or-later.html)
 
 The next line:
 
@@ -144,7 +144,7 @@ There's alot to digest with respect to the changes made to this script to bring 
 
 The recommended way to interface with the Solidity compiler, especially when developing more complex and automated setups is the so-called JSON-input-output interface. In summary, the compiler API expects a JSON formatted input and outputs the compilation result in a JSON formatted output. For details on this approach, including thorough descriptions of the input and output formats, check out the Solidity docs [here](https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-input-and-output-json-description).
 
-In our updated `compile.js` above, we declare a variable named `input` to hold a JavaScript object representation of the input that will be passed to the compiler after it's JSON stringified. In this object we define the single Solidity source file that has to be compiled, `Inbox.sol`, passing the fully loaded source code of the contract as the content source of the contract.
+In our `compile.js` above, we declare a variable named `input` to hold a JavaScript object representation of the input that will be passed to the compiler after it's JSON stringified. In this object we define the single Solidity source file that has to be compiled, `Inbox.sol`, passing the fully loaded source code of the contract as the content source of the contract.
 
 The lines
 
@@ -299,9 +299,9 @@ The changes in this script from the course's version are as follows:
 - The line `const { abi, evm } = require("./compile");` replaces the `const { interface, bytecode } = require("./compile");` line that's found in the course example, and we access the bytecode object via `evm.bytecode.object`.
 - Instead of hard-coding the account mnemonic and Infura endpoint as is done in the course's deploy script, I'm storing and referencing these via environment variables.
 - A [Goerli Infura](https://app.infura.io) endpoint (stored in the `process.env.GOERLI_ENDPOINT` environment variable) is passed to `HDWalletProvider` instead of a Rinkeby endpoint since the Rinkeby network no longer exists. So when copying your endpoint from the Infura dashboard, remember to grab the Goerli Ethereum endpoint.
-- The `dotenv` package is used to read these environment variables from a `.env` file. Create that file locally in the root of this inbox folder and copy the contents of `.env.example` into your `.env` file. Set `ACCOUNT_MNEMONIC` and `GOERLI_ENDPOINT` in your `.env` file appropriately. **DO NOT use a mnemonic for an account/wallet with real money or Ether associated with it!**
+- The `dotenv` package is used to read these environment variables from a `.env` file. Create that file locally in the root of your inbox folder and copy the contents of [`.env.example`](./.env.example) into your `.env` file. Set `ACCOUNT_MNEMONIC` and `GOERLI_ENDPOINT` in your `.env` file appropriately. **DO NOT use a mnemonic for an account/wallet with real money or Ether associated with it!**
 - To prevent the deployment from hanging, the statement `provider.engine.stop();` is added at the end of the `deploy` function definition.
 
 ## That's all for now
 
-That about covers things where the updates to the Inbox smart contract and Node.js project are concerned. I sincerely hope my contributions prove useful to all students of the course who find their way to this repository.
+That about covers things where the updates to the Inbox smart contract and Node.js project are concerned. As always, I sincerely hope my contributions prove useful to all students of the course who find their way to this repository.
