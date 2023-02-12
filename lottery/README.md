@@ -14,7 +14,7 @@
 
 ## Lottery Smart Contract
 
-This is the second smart contract implemented in the udemy.com course and whereas the first contract (`Inbox`) was extremely simple, the `Lottery` contract is significantly more complex. It introduces some of Solidity's more advanced concepts which you should ensure you understand thoroughly if you want to be on your way to mastering smart contract development. Also note that in order to bring the Lottery contract's code up-to-date, the changes I made from what is implemented in the course are significant.
+This is the second smart contract implemented in the udemy.com course and whereas the first contract (`Inbox`) was extremely simple, the `Lottery` contract is more complex. It introduces some of Solidity's more advanced concepts which you should ensure you understand thoroughly if you want to be on your way to mastering smart contract development. Also note that in order to bring the Lottery contract's code up-to-date, the changes I made from what is implemented in the course are significant.
 
 You can find my version of the Lottery smart contract [here](./contracts/Lottery.sol) and it is shown immediately below. For frictionless readability, I've kept the comments alongside the source code, since they provide clear explanations for each part of the code in a seamless way.
 
