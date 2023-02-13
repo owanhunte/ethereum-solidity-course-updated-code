@@ -57,7 +57,7 @@ contract Lottery {
     //
     // VM Paris Update: Note that in September 2022, Ethereum transitioned to proof-of-stake consensus,
     // also known as The Merge. One of the changes this resulted in was the introduction of a new
-    // opcode called 'prevrandao', which replaces the 'difficulty' opcode. As such, since Solidity >= 0.8.18
+    // opcode called 'prevrandao', which replaces the 'difficulty' opcode. As such, since Solidity 0.8.18
     // block.difficulty has been deprecated and instead, block.prevrandao should be used.
     return uint256(keccak256(abi.encodePacked(block.prevrandao, block.number, players)));
   }
