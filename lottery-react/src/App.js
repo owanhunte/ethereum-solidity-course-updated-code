@@ -115,14 +115,34 @@ function App() {
   const onSubmit = async event => {
     event.preventDefault();
     setEnteringLottery(true);
-    const accounts = await web3.eth.getAccounts();
-    showMessage("Waiting on transaction success...");
-    await lotteryContract.current.methods.enter().send({
-      from: accounts[0],
-      value: web3.utils.toWei(value, "ether")
-    });
-    showMessage("You have been entered!");
-    updatePlayersListAndBalance();
+
+    if (value < "0.01") {
+      showMessage("The minimum entry fee for the lottery is 0.01 ether.");
+    } else {
+      const accounts = await web3.eth.getAccounts();
+      showMessage("Attempting to enter you into the lottery...");
+
+      try {
+        await lotteryContract.current.methods.enter().send({
+          from: accounts[0],
+          value: web3.utils.toWei(value, "ether")
+        });
+
+        showMessage("You have been entered!");
+        updatePlayersListAndBalance();
+      } catch (error) {
+        switch (error.code) {
+          case 4001:
+            showMessage("You declined to enter the lottery.");
+            break;
+          default:
+            showMessage(
+              "An error occurred while attempting to enter you in the lottery. Don't worry, no funds were sent from your Goerli wallet."
+            );
+            break;
+        }
+      }
+    }
     setEnteringLottery(false);
   };
 
@@ -130,16 +150,28 @@ function App() {
     event.preventDefault();
     setPickingWinner(true);
     const accounts = await web3.eth.getAccounts();
-    showMessage("Waiting on transaction success...");
-    await lotteryContract.current.methods.pickWinner().send({
-      from: accounts[0]
-    });
-    showMessage("A winner has been picked!");
-    updatePlayersListAndBalance();
+    showMessage("Attempting to pick a winner...");
+    try {
+      await lotteryContract.current.methods.pickWinner().send({
+        from: accounts[0]
+      });
+
+      showMessage("A winner has been picked!");
+      updatePlayersListAndBalance();
+    } catch (error) {
+      switch (error.code) {
+        case 4001:
+          showMessage("You did not pick a winner.");
+          break;
+        default:
+          showMessage("An error occurred while attempting to pick a winner.");
+          break;
+      }
+    }
     setPickingWinner(false);
   };
 
-  const showMessage = async msg => {
+  const showMessage = msg => {
     setMessage(msg);
   };
 

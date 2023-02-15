@@ -6,7 +6,7 @@
  * NOTE: Update the contractAddress and abi variables to those for your own deployed contract.
  */
 
-export const contractAddress = "0x7d10af4B72A516767bCf171Cf99C39778fC62756";
+export const contractAddress = "0x900ff505fF412551463Ae92E625f8fA546E3f32e";
 
 export const abi = [
   {
