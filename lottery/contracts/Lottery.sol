@@ -22,7 +22,7 @@ contract Lottery {
   function enter() public payable {
     // Note: Although optional, it's a good practice to include error messages
     // in `require` calls.
-    require(msg.value > .01 ether, "A minimum payment of .01 ether must be sent to enter the lottery");
+    require(msg.value >= .01 ether, "A minimum payment of .01 ether must be sent to enter the lottery");
 
     // As of Solidity 0.8.0 the global variable `msg.sender` has the type
     // `address` instead of `address payable`. So we must convert msg.sender

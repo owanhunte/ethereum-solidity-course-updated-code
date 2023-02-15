@@ -11,7 +11,7 @@ function App() {
   const [doneCheckingForMetaMask, setDoneCheckingForMetaMask] = useState(false);
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
-  const [isRinkebyChain, setIsRinkebyChain] = useState(false);
+  const [isGoerliTestnet, setIsGoerliTestnet] = useState(false);
 
   const [manager, setManager] = useState("");
   const [players, setPlayers] = useState([]);
@@ -32,10 +32,10 @@ function App() {
           const web3Instance = await initWeb3();
           setWeb3(web3Instance);
 
-          // Transactions done in this app must be done on the Rinkeby test network.
-          const chainId = await ethereum.request({ method: 'eth_chainId' });
-          if (chainId === "0x4") {
-            setIsRinkebyChain(true);
+          // Transactions done in this app must be done on the Goerli test network.
+          const chainId = await ethereum.request({ method: "eth_chainId" });
+          if (chainId === "0x5") {
+            setIsGoerliTestnet(true);
           }
 
           setDoneCheckingForMetaMask(true);
@@ -89,7 +89,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connected]);
 
-  const getAccount = async (_event) => {
+  const getAccount = async _event => {
     setConnecting(true);
     try {
       await ethereum.request({ method: "eth_requestAccounts" });
@@ -97,7 +97,7 @@ function App() {
     setConnecting(false);
   };
 
-  const handleAccountsChanged = (_accounts) => {
+  const handleAccountsChanged = _accounts => {
     window.location.reload();
   };
 
@@ -112,34 +112,66 @@ function App() {
     setBalance(balance);
   };
 
-  const onSubmit = async (event) => {
+  const onSubmit = async event => {
     event.preventDefault();
     setEnteringLottery(true);
-    const accounts = await web3.eth.getAccounts();
-    showMessage("Waiting on transaction success...");
-    await lotteryContract.current.methods.enter().send({
-      from: accounts[0],
-      value: web3.utils.toWei(value, "ether")
-    });
-    showMessage("You have been entered!");
-    updatePlayersListAndBalance();
+
+    if (value < "0.01") {
+      showMessage("The minimum entry fee for the lottery is 0.01 ether.");
+    } else {
+      const accounts = await web3.eth.getAccounts();
+      showMessage("Attempting to enter you into the lottery...");
+
+      try {
+        await lotteryContract.current.methods.enter().send({
+          from: accounts[0],
+          value: web3.utils.toWei(value, "ether")
+        });
+
+        showMessage("You have been entered!");
+        updatePlayersListAndBalance();
+      } catch (error) {
+        switch (error.code) {
+          case 4001:
+            showMessage("You declined to enter the lottery.");
+            break;
+          default:
+            showMessage(
+              "An error occurred while attempting to enter you in the lottery. Don't worry, no funds were sent from your Goerli wallet."
+            );
+            break;
+        }
+      }
+    }
     setEnteringLottery(false);
   };
 
-  const pickWinner = async (event) => {
+  const pickWinner = async event => {
     event.preventDefault();
     setPickingWinner(true);
     const accounts = await web3.eth.getAccounts();
-    showMessage("Waiting on transaction success...");
-    await lotteryContract.current.methods.pickWinner().send({
-      from: accounts[0]
-    });
-    showMessage("A winner has been picked!");
-    updatePlayersListAndBalance();
+    showMessage("Attempting to pick a winner...");
+    try {
+      await lotteryContract.current.methods.pickWinner().send({
+        from: accounts[0]
+      });
+
+      showMessage("A winner has been picked!");
+      updatePlayersListAndBalance();
+    } catch (error) {
+      switch (error.code) {
+        case 4001:
+          showMessage("You did not pick a winner.");
+          break;
+        default:
+          showMessage("An error occurred while attempting to pick a winner.");
+          break;
+      }
+    }
     setPickingWinner(false);
   };
 
-  const showMessage = async (msg) => {
+  const showMessage = msg => {
     setMessage(msg);
   };
 
@@ -150,10 +182,12 @@ function App() {
         This is a test-only deployment of the{" "}
         <a href="https://github.com/owanhunte/ethereum-solidity-course-updated-code/tree/main/lottery-react">
           Lottery React app
-        </a>, based on the udemy.com course{" "}
+        </a>
+        , based on the udemy.com course{" "}
         <a href="https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/">
           Ethereum and Solidity: The Complete Developer's Guide
-        </a>. Ether transactions from this app run on the <em>Rinkeby test network only</em>.
+        </a>
+        . Ether transactions from this app run on the <em>Goerli test network only</em>.
       </div>
 
       {web3 === null && !doneCheckingForMetaMask && (
@@ -170,40 +204,31 @@ function App() {
           <div className="alert error">
             <h1 className="no-margin-top">Lottery Contract</h1>
             <p className="no-margin">
-              MetaMask is required to run this app! Please install MetaMask and then refresh this
-              page.
+              MetaMask is required to run this app! Please install MetaMask and then refresh this page.
             </p>
           </div>
         </div>
       )}
 
-      {web3 !== null && doneCheckingForMetaMask && !isRinkebyChain && (
+      {web3 !== null && doneCheckingForMetaMask && !isGoerliTestnet && (
         <div className="page-center">
           <div className="alert error">
             <h1 className="no-margin-top">Lottery Contract</h1>
             <p className="no-margin">
-              You must be connected to the <strong>Rinkeby test network</strong> for Ether
-              transactions made via this app.
+              You must be connected to the <strong>Goerli test network</strong> for Ether transactions made via this
+              app.
             </p>
           </div>
         </div>
       )}
 
-      {web3 !== null && !connected && isRinkebyChain && (
+      {web3 !== null && !connected && isGoerliTestnet && (
         <div className="page-center">
           <section className="card">
             <h1 className="no-margin-top">Lottery Contract</h1>
-            <p>
-              Want to try your luck in the lottery? Connect with MetaMask and start competing right
-              away!
-            </p>
+            <p>Want to try your luck in the lottery? Connect with MetaMask and start competing right away!</p>
             <div className="center">
-              <button
-                className="btn primaryBtn"
-                type="button"
-                onClick={getAccount}
-                disabled={connecting}
-              >
+              <button className="btn primaryBtn" type="button" onClick={getAccount} disabled={connecting}>
                 Connect with MetaMask
               </button>
             </div>
@@ -211,7 +236,7 @@ function App() {
         </div>
       )}
 
-      {web3 !== null && connected && isRinkebyChain && (
+      {web3 !== null && connected && isGoerliTestnet && (
         <div className="page-center">
           <section className="card">
             <h1 className="no-margin-top">Lottery Contract</h1>
@@ -229,7 +254,7 @@ function App() {
               <h4>Want to try your luck?</h4>
               <div>
                 <label>Amount of ether to enter:</label>{" "}
-                <input value={value} onChange={(event) => setValue(event.target.value)} />{" "}
+                <input value={value} onChange={event => setValue(event.target.value)} />{" "}
                 <button className="btn primaryBtn" type="submit" disabled={enteringLottery}>
                   Enter
                 </button>
@@ -241,12 +266,7 @@ function App() {
                 <hr />
 
                 <h4>Ready to pick a winner?</h4>
-                <button
-                  className="btn primaryBtn"
-                  type="button"
-                  onClick={pickWinner}
-                  disabled={pickingWinner}
-                >
+                <button className="btn primaryBtn" type="button" onClick={pickWinner} disabled={pickingWinner}>
                   Pick a winner!
                 </button>
               </>

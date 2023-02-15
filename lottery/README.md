@@ -1,6 +1,6 @@
 # Up-to-date Lottery Smart Contract, Node.js Scripts & Unit Tests
 
-> Section 2 of the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/) by [Stephen Grider](https://www.udemy.com/user/sgslo/) implements a Lottery smart contract, along with a Node.js compile script, deploy script and unit tests for that contract. In this repo I provide up-to-date equivalents (along with detailed explanations) for each of these, for the benefit of students who have enrolled in Stephen's course.
+> Section 3 of the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/) by [Stephen Grider](https://www.udemy.com/user/sgslo/) implements a Lottery smart contract, along with a Node.js compile script, deploy script and unit tests for that contract. In this repo I provide up-to-date equivalents (along with detailed explanations) for each of these, for the benefit of students who have enrolled in Stephen's course.
 
 ## Contents
 

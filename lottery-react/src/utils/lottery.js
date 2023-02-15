@@ -1,28 +1,25 @@
 /***
  * The following contract address and ABI are for a deployment of the Lottery contract made to the
- * Rinkeby Test Network. The contract itself was compiled using version 0.8.5 of the Solidity
+ * Goerli Ethereum Test Network. The contract itself was compiled using version 0.8.18 of the Solidity
  * compiler.
  *
  * NOTE: Update the contractAddress and abi variables to those for your own deployed contract.
  */
 
-export const contractAddress = "0xB3493F8C137DaEb3A10bF99760AE2c574c375373";
+export const contractAddress = "0x900ff505fF412551463Ae92E625f8fA546E3f32e";
 
 export const abi = [
   {
     inputs: [],
     stateMutability: "nonpayable",
-    type: "constructor",
-    signature: "constructor"
+    type: "constructor"
   },
   {
     inputs: [],
     name: "enter",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
-    payable: true,
-    signature: "0xe97dcb62"
+    type: "function"
   },
   {
     inputs: [],
@@ -35,9 +32,7 @@ export const abi = [
       }
     ],
     stateMutability: "view",
-    type: "function",
-    constant: true,
-    signature: "0x8b5b9ccc"
+    type: "function"
   },
   {
     inputs: [],
@@ -50,17 +45,14 @@ export const abi = [
       }
     ],
     stateMutability: "view",
-    type: "function",
-    constant: true,
-    signature: "0x481c6a75"
+    type: "function"
   },
   {
     inputs: [],
     name: "pickWinner",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x5d495aea"
+    type: "function"
   },
   {
     inputs: [
@@ -79,8 +71,6 @@ export const abi = [
       }
     ],
     stateMutability: "view",
-    type: "function",
-    constant: true,
-    signature: "0xf71d96cb"
+    type: "function"
   }
 ];

@@ -12,9 +12,9 @@ import Web3 from "web3";
  *
  *    See https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
  *    for more details on using the Ethereum Provider API.
- * 
+ *
  * 2) Even if MetaMask is installed and the Ethereum provider detected, App.js
- *    enforces a requirement that the user MUST be on the Rinkeby test network.
+ *    enforces a requirement that the user MUST be on the Goerli testnet network.
  *
  * 3) Unlike the approach the course takes where it automatically initiates a
  *    connection request to access the user's Ethereum account(s) when the app
@@ -45,11 +45,11 @@ const initWeb3 = async () => {
     web3 = new Web3(provider);
 
     // Reload the page when the currently connected chain changes.
-    ethereum.on("chainChanged", (_chainId) => {
+    ethereum.on("chainChanged", _chainId => {
       window.location.reload();
     });
 
-    ethereum.on("disconnect", (_error) => {
+    ethereum.on("disconnect", _error => {
       window.location.reload();
     });
 
