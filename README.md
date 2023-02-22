@@ -1,27 +1,27 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
 **Update In Progress...**
-_Hi all, it's been a long time coming but I've finally gotten around to putting some time into bringing this repo up-to-date. I have started by renaming the default branch from `master` to `main`, and I created a new branch named [`update_solidity_0_8`](https://github.com/owanhunte/ethereum-solidity-course-updated-code/tree/update_solidity_0_8) which I'll be committing all the updated code to. As I make progress, I'll be merging this branch back into the `main` branch._
+This repo is currently being brought up-to-date. So far, updates to the _Inbox_ and _Lottery_ smart contracts, Node.js compile and deploy scripts, unit tests and the Lotttery React web app have all been completed. Updates to the _Kickstart/CrowdCoin_ Next.js web app are in progress and should be completed over the coming week.
 
 ## Purpose of this Repo
 
-Up-to-date Solidity/web3.js/React/Next.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
+Up-to-date Solidity/web3.js/Node.js/React/Next.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/).
 
 ## The Reason
 
-Toward the end of 2019 I became very interested in entering the blockchain development space and so I embarked on a journey to learn as much as I can, as quickly as I can, within this ever-evolving tech space we refer to as _Blockchain_, and to be more specific, the **Ethereum ecosystem**. Of course, I quickly realised that the development tools and packages being used to build, develop and deploy dApps and tech within this ecosystem all share a common trend: **rapid change and evolution, often introducing breaking changes through iterations of their releases**.
+Toward the end of 2019 I became very interested in entering the blockchain development space and so I embarked on a journey to learn as much as I can, as quickly as I can, within this ever-evolving tech space, and to be more specific, the **Ethereum ecosystem**. Of course, I quickly realised that the development tools and packages being used to build, develop and deploy dApps and tech within this ecosystem all share a common trend: **rapid change and evolution, sometimes introducing breaking changes through iterations of their releases**.
 
-I make heavy use of the online learning website [udemy.com](https://www.udemy.com/) and find it to be a great supplementary learning tool. So naturally I bought a few courses on Ethereum and Solidity. The problem is, each of these courses target outdated versions of [Solidity](https://docs.soliditylang.org), [web3.js](https://web3js.readthedocs.io/) and [Truffle](https://www.trufflesuite.com/) in their course lessons and code examples. In the course creators' defense, remember, this is rapidly evolving tech we're dealing with here and the respective effort required to keep their video course content up-to-date with current software releases can be rather challenging.
+I make heavy use of the online learning website [udemy.com](https://www.udemy.com/) and find it to be a great supplementary learning tool. So naturally I bought a few courses on Ethereum and Solidity. The problem is, many of these courses target outdated versions of [Solidity](https://docs.soliditylang.org), [web3.js](https://web3js.readthedocs.io/) and [Truffle](https://www.trufflesuite.com/) in their course lessons and code examples. In the course creators' defense, remember, this is rapidly evolving tech we're dealing with here and the respective effort required to keep their video course content up-to-date with current software releases can be rather challenging.
 
 _And so, that's where I decided to lend a bit of a helping hand_.
 
 ## Let the Code speak
 
-I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I found most enjoyable and acceptable so far.
+I figured that if I wanted the online courses I enrolled in to provide up-to-date code then **other developers also had to want this**. So, I decided to take action and just write the updated code myself, starting with the Udemy course _Ethereum and Solidity: The Complete Developer's Guide_, the one I found most enjoyable and acceptable.
 
 ## Repository structure
 
-This repository was setup as a monorepo, so as to keep the updated versions of the isolated bits of the course's code and tests well organized all within a single repository.
+This repository was setup as a monolithic repository (without the full monorepo structure so as not to introduce unnecessary extra complexity beyond the scope of the udemy.com course), allowing me to keep the updated versions of the isolated bits of the course's code and tests well organized all within a single repository.
 
 ### Smart Contracts
 
@@ -43,14 +43,14 @@ For Create React App, the previous approach of installing globally via `npm inst
 
 For more details on the above methods, see [https://create-react-app.dev/docs/getting-started](https://create-react-app.dev/docs/getting-started).
 
-**For the Kickstart/CrowdCoin app I used the latest version of Next.js when I created this repo, and this is now being updated to the currently latest version of Next.js (v12) as part of my current efforts to bring this repo up-to-date.**
+**The Kickstart/CrowdCoin app implemented in this repo is itself currently being updated to the latest version of Next.js (v13).**
 
 ### The lottery-react App
 
-To create the `lottery-react` app I chose to use the yarn command option, as follows:
+To create the `lottery-react` app I chose to use the npx command option, as follows:
 
 ```bash
-yarn create react-app lottery-react
+npx create-react-app lottery-react
 ```
 
 - [Browse the lottery-react App code files](/lottery-react)
@@ -59,8 +59,8 @@ yarn create react-app lottery-react
 
 ### The Kickstart/CrowdCoin App
 
-- [Browse the CrowdCoin app code files](/kickstart)
-- [Live Demo of the app](https://kickstart.owanh.now.sh/)
+- [Browse the app code files](/kickstart)
+- Live Demo of the app (_update in progress_)
 
 ## Acknowledgement
 
