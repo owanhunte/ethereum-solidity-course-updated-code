@@ -1,7 +1,7 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
 **Update In Progress...**
-This repo is currently being brought up-to-date. So far, updates to the _Inbox_ and _Lottery_ smart contracts, Node.js compile and deploy scripts, unit tests and the Lotttery React web app have all been completed. Updates to the _Kickstart/CrowdCoin_ Next.js web app are in progress and should be completed over the coming week.
+This repo is currently being brought up-to-date. So far, updates to the _Inbox_ and _Lottery_ smart contracts, Node.js compile and deploy scripts, unit tests and the Lotttery React web app have all been completed. Updates to the _Kickstart/CrowdCoin_ Next.js web app are in progress and should be completed over the coming weeks.
 
 ## Purpose of this Repo
 
