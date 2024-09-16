@@ -1,6 +1,7 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
-**Note: This repo is no longer maintained**
+## Note: This repo is no longer maintained
+
 Hi, for anyone who has stumbled upon this repo in hope of finding up-to-date Solidity/web3.js/Node.js/React/Next.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/), a course that I was a student of and NOT the lecturer/creator, unfortunately while some parts of the repo do provide up-to-date code and explanations, I have not been able to afford the time to keep maintaining this repo as I would have liked and so I have decided to archive it. 
 
 ## Purpose of this Repo
