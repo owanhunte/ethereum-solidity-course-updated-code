@@ -1,15 +1,7 @@
 # Ethereum and Solidity: The Complete Developer's Guide (Community Contributed Code Updates)
 
-**Note: This repo is currently NOT maintained**
-Hi, for anyone who has stumbled upon this repo in hope of finding up-to-date Solidity/web3.js/Node.js/React/Next.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/), a course that I was a student of and NOT the lecturer/creator, unfortunately while some parts of the repo do provide up-to-date code and explanations, I have not been able to afford the time to keep maintaining this repo as I would have liked and it is terribly in need of some love. As a result I am reaching out to the community for help so as to avoid possibly archiving this repo if I continue to be unable to dedicate time and energy to maintaining it.
-
-## Donations Welcome
-
-If anyone is willing to donate to the cause, I would be happy to accept cryptocurrency donations such as USDC, USDT, ETH, which would be used to help fund any efforts to bring this repo up-to-date and keep it maintained. Feel free to send donations to any of the following addresses:
-
-**Ethereum/Polygon/Arbitrum One:** 0xC3d6e1BC6715656a4F6aF55351F5D0c65fd033af   (USDC, USDT or ETH preferred)
-
-**Solana:** C1VzbFJvtqe6ehaoo3oxyvkYTCCwSK3Azvv5GMNArfvg  (USDC or SOL preferred)
+**Note: This repo is no longer maintained**
+Hi, for anyone who has stumbled upon this repo in hope of finding up-to-date Solidity/web3.js/Node.js/React/Next.js code for the udemy.com course [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/), a course that I was a student of and NOT the lecturer/creator, unfortunately while some parts of the repo do provide up-to-date code and explanations, I have not been able to afford the time to keep maintaining this repo as I would have liked and so I have decided to archive it. 
 
 ## Purpose of this Repo
 
